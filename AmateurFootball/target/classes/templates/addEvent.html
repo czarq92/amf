@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Zdarzenie</title>
+	<link rel="stylesheet" href="/css/style_card_regPlayer.css" type="text/css" media="all" />
+</head>
+
+ <body>
+	<div class="card">
+		<h1>Dodaj Zdarzenie</h1>
+		
+		<form action="#" th:action="@{/addEvent/}" th:object="${event}" method="post">
+				<input type="hidden" th:field="*{match.id_match}"/>
+				
+			<div class="info">Wybierz gracza: </div>
+			<select th:field="*{player.id_player}">
+				<option th:each="obj : ${coachPlayerList}" th:value="${obj.id_player}" th:text="'Numer #' + ${obj.getNumber()}+ '--> ' + ${obj.getName()} + ' ' + ${obj.getSurname()}"/>
+			</select><p></p>
+			
+			<div class="info">Podaj czas zdarzenia(minutę): </div>
+			<div class="error" th:if="${#fields.hasErrors('event_time')}" th:errors="*{event_time}"/>
+			<input type="text" maxlength="2" th:field="*{event_time}" th:class="${#fields.hasErrors('event_time')}? 'error'"/><br/>
+				
+				<div class="info">Wybierz typ zdarzenia: </div>
+				<select th:field="*{event_type}">
+					<option th:value="'bramka'" th:text="'Bramka'"/>
+					<option th:value="'zolta_kartka'" th:text="'Żółta Kartka'"/>
+					<option th:value="'czerwona_kartka'" th:text="'Czerwona Kartka'"/>
+					<option th:value="'faul'" th:text="'Faul'"/>
+				</select><p></p>
+	
+			<input type="submit" class="button button-submit" value="Dodaj"/>
+		</form>
+		
+		<div class="help">
+			<p class="center"><a href="/matchSite">Strona Aktualizacji MECZY</a></p>
+			<p class="center"><a href="/coachSite">Strona TRENERA</a></p>
+		</div>	
+	</div>
+ </body>
+</html>

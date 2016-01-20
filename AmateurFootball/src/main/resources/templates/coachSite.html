@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>AmateurFootball</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+</head>
+<body>
+	<!-- Header -->
+	<div id="header">
+		<div class="shell">
+			<!-- Logo -->
+			<h1 id="logo" class="notext"><a href="index">Amateur Football</a></h1>
+			<!-- End Logo -->
+		</div>
+	</div>
+	<!-- End Header -->
+	
+	<!-- Navigation -->
+	<div id="navigation">
+		<div class="shell">
+			<div class="cl">&nbsp;</div>
+			<ul>
+				<li><a href="index">Aktualności</a></li>
+				<li><a href="#">Drużyny</a></li>
+			    <li><a href="#">Tabele</a></li>
+			    <li><a href="#">Wyniki</a></li>
+			    <li><a href="#">Harmonogram</a></li>
+			    <li><a href="#">Statystyki</a></li>
+			    <li><a href="#">Moje Konto</a></li>
+			    <li>
+				    <a href="login">
+				    	<div th:if="${session.nameUserLogged == null}">Zaloguj się</div>
+				    	<a th:if="${session.nameUserLogged != null}">
+				    		<a href="logout">
+				    			<div th:text="${session.nameUserLogged}"/>(WYLOGUJ)
+				    		</a>
+				    	</a>
+				    </a>
+			    </li>
+			</ul>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</div>
+	<!-- End Navigation -->
+	
+	<!-- Heading -->
+	<div id="heading">
+		<div class="shell">
+			<div id="heading-cnt">
+				
+				<!-- Sub nav -->
+				<div id="side-nav">
+					<ul>
+					    <li><div class="link"><a href="addTeam">DODAJ Drużynę</a></div></li>
+					    <li><div class="link"><a href="addPlayer">DODAJ Gracza</a></div></li>
+					    <li><div class="link"><a href="matchSite">AKTUALIZUJ Mecz</a></div></li>
+					    <li><div class="link"><a href="editPlayer">EDYTUJ Graczy</a></div></li>
+					    <li><div class="link"><a href="notifyTeam">ZGŁOŚ Drużynę</a></div></li>
+					</ul>
+				</div>
+				<!-- End Sub nav -->
+				
+				<!-- Widget -->
+				<div id="heading-box">
+					<div id="heading-box-cnt">
+						<div class="cl">&nbsp;</div>
+						<!-- Main Slide Item -->
+						<div class="featured-main">
+							<img src="images/coach-main.jpg" alt=""/>
+							<div class="featured-main-details">
+								<div class="featured-main-details-cnt">									
+									<h4>Witaj na stronie Trenera !</h4>
+									<p>Profil Trenera umożliwia Ci utworzenie drużyny, graczy i zarządzanie meczami.</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Main Slide Item -->
+						
+						<div class="featured-side">
+													
+							<!-- Slide Item 1 -->
+							<div class="featured-side-item">
+								<div class="cl">&nbsp;</div>
+								<a href="#" class="left"><img src="images/featured-side-2.jpg" alt="" /></a>
+								
+								<h4>Jakieś info</h4>
+								<p> Aaj </p>
+								<div class="cl">&nbsp;</div>
+							</div>
+							<!-- End Slide Item 1 -->
+							
+							<!-- Slide Item 2 -->
+							<div class="featured-side-item">
+								<div class="cl">&nbsp;</div>
+								<a href="#" class="left"><img src="images/featured-side-1.jpg" alt="" /></a>
+								
+								<h4>Gracze</h4>
+								<p>
+									<table border="1">
+										<tr>
+											<td>Imie</td>
+											<td>Wiek</td>
+											<td>Position</td>
+											<td>Nr</td>
+										</tr> 
+										<tr th:each="player : ${players}">
+											<td th:text="${player.getName()}"/>
+											<td th:text="${player.getAge()}"/>
+											<td th:text="${player.getPosition()}"/>
+											<td th:text="${player.getNumber()}"/>
+										</tr> 
+									</table>
+								</p>
+								<div class="cl">&nbsp;</div>
+							</div>
+							<!-- End Slide Item 2 -->
+							
+							<!-- Slide Item 3 -->
+							<div class="featured-side-item">
+								<div class="cl">&nbsp;</div>
+								<a href="#" class="left"><img src="images/featured-side-3.jpg" alt="" /></a>
+								<h4><a href="#">Dolor si atema commodo</a></h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque turpis urna</p>
+								<div class="cl">&nbsp;</div>
+							</div>
+							<!-- End Slide Item 3 -->
+
+						</div>
+						<div class="cl">&nbsp;</div>						
+					</div>
+				</div>
+				<!-- End Widget -->
+				
+			</div>			
+		</div>
+	</div>
+	<!-- End Heading -->
+	
+	<!-- Main -->
+	<div id="main">
+		<div class="shell">		
+			<div class="cl">&nbsp;</div>	
+			<div id="sidebar">
+				<h2>NOWOŚCI</h2>
+				<ul>
+				    <li th:each="newsObject, iterStat : ${news}" th:if="${iterStat.index >= iterStat.size-3}">
+				    	<small class="date"> <div th:text="${newsObject.getDate()}"/></small>
+				    	<p th:text="${newsObject.getMessage()}"/>
+				    </li>
+				</ul>
+				<a href="news" class="archives">Archiwum Nowości</a>
+			</div>
+			<div id="content">
+				<div class="cl">&nbsp;</div>
+				<div class="grey-box">
+					<h3>Lista Graczy</h3>
+						<img src="images/gray-box1.jpg" alt=""/>
+					<p>
+						<span>W tym miejscu sprawdzisz listę graczy zarejestrowanych w systemie!</span>
+						<a href="playerList" class="button">Sprawdź!</a>
+					</p>
+				</div>
+				<div class="grey-box">
+					<h3>Lista Zespołów</h3>
+					<img src="images/gray-box2.jpg" alt=""/>
+					<p>
+						<span>Zbadaj, jakie zespoły są zarejestrowane w systemie!</span>
+						<a href="teamList" class="button">Sprawdź!</a>
+					</p>
+				</div>
+				<div class="grey-box last">
+					<h3>Lista Meczy</h3>
+					<img src="images/gray-box3.jpg" alt=""/>
+					<p>
+						<span>Sprawdź lsitę rozegranych i zaplanowanych meczy!</span>
+						<a href="#" class="button">Sprawdź!</a>
+					</p>
+				</div>
+			</div>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</div>
+	<!-- End Main -->
+	
+	<!-- Footer -->
+	<div id="footer">
+		<div class="shell">
+			<div class="cl">&nbsp;</div>
+			<!-- <a href="#" class="left">PRIVACY POLICY</a> -->
+				<p class="center">System powstal w wyniku realizacji pracy dyplomowej na Wydziale Informatyki Politechniki Bialostockiej. </p>
+			<div class="cl">&nbsp;</div>
+		</div>
+	</div>
+	<!-- End Footer -->
+</body>
+</html>

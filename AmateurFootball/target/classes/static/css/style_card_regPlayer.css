@@ -1,0 +1,186 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+body {
+  background: url(/images/card-player-background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+}
+
+.center { text-align: center }
+
+.error { 
+	color: #FD0000;
+	font-weight: 500;
+ } 
+ 
+.info { 
+	color: #97DE00;
+	font-weight: 400;
+ } 
+ 
+.card {
+  padding: 25px;
+  width: 300px;
+  background-color: #171717;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 100px 100px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  margin-left: -175px;
+}
+
+.card h1 {
+  font-weight: 100;
+  color: white;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.card input[type=submit], input[type=button] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.card input[type=reset] {
+  width: 49%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.card select {
+  height: 30px;
+  font-size: 16px;
+  width: 40%;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.card select:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  background: #e2ffa8;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.card input[type=text], input[type=password] {
+  height: 35px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  border-radius: 2px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.card input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.button {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 45px;
+  padding: 0 8px;
+  border-radius: 5px;
+}
+
+.button2 {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 5px;
+}
+
+.button-submit {
+  border: 1px solid #3079ed;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #b5ff1c;
+}
+
+.button-submit:hover {
+  border: 1px solid white;
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #97DE00;
+}
+
+.button-cancel {
+  border: 1px solid #3079ed;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #ff7979;
+}
+
+.button-cancel:hover {
+  border: 1px solid white;
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #ff0000;
+}
+
+.button-switch {
+  border: 1px solid #3079ed;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #51a8ff;
+}
+
+.button-switch:hover {
+  border: 1px solid white;
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #0080ff;
+}
+
+.card a {
+  text-decoration: none;
+  color: white;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.2;
+  /*transition: opacity ease 0.5s;*/
+}
+
+.card a:hover {
+  opacity: 1;
+}
+
+.help {
+  width: 100%;
+  color: gray;
+  text-align: center;
+  font-size: 13px;
+}
