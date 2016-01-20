@@ -86,9 +86,6 @@ public class Player implements Serializable, Comparable<Player>{
 				+ ", age=" + age + ", number=" + number + "]";
 	}
 	
-//	"id_team="+ team.getId_team() +
-
-
 	@Override
 	public int compareTo(Player comparedPlayer) {
 		int compareNumber = (comparedPlayer).getNumber();

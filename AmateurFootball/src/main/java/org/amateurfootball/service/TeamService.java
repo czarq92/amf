@@ -1,5 +1,6 @@
 package org.amateurfootball.service;
 
+import org.amateurfootball.model.Player;
 import org.amateurfootball.model.Team;
 import org.amateurfootball.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,29 @@ public class TeamService {
 			team.setRanked(i++);
 			teamRepository.save(team);
 		}
+	}
+	
+	public void deletePlayerFromTeamPlayerList(Long idTeam, int idPlayer){
+		Team team = teamRepository.findOne(idTeam);
+		
+		List<Player> playerList = team.getPlayerList();
+		int i = 0;
+		
+		for (Player player : playerList) {
+			int idPlayerTmp = toIntExact(player.getId_player());
+			
+			if(idPlayerTmp == idPlayer){
+				playerList.remove(i);
+				break;
+			}
+			i++;
+		}
+		
+		System.out.println(playerList.toString());
+		
+		team.setPlayerList(playerList);
+		teamRepository.save(team);
+		
 	}
 	
 }

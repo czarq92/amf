@@ -5,10 +5,8 @@ import javax.validation.Valid;
 
 import org.amateurfootball.model.Event;
 import org.amateurfootball.model.Match;
-import org.amateurfootball.model.Team;
 import org.amateurfootball.repository.EventRepository;
 import org.amateurfootball.repository.MatchRepository;
-import org.amateurfootball.repository.TeamRepository;
 import org.amateurfootball.service.MatchService;
 import org.amateurfootball.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +25,6 @@ public class AddEventController {
 	private EventRepository eventRepository;
 	@Autowired
 	private MatchRepository matchRepository;
-	@Autowired
-	private TeamRepository teamRepository;
 	@Autowired
 	private TeamService teamService;
 	@Autowired

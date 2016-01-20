@@ -80,15 +80,24 @@
 								<div id="sidebar2">
 									<h4 class="center">Lista Graczy</h4>
 									<ul>
-									    <li th:each="player : ${playerList}">
-									    	<small class="date"> 
-									    		<div th:text="'Imie i Nazwisko: ' + ${player.getName()} + ' ' + ${player.getSurname()}"/>
-									    	</small>
-									    	<p2 th:text="'Wiek: ' + ${player.getAge()}"/>
-									    	<p2 th:text="'Pozycja: ' + ${player.getPosition()}"/>
-									    	<p2 th:text="'Numer: ' + ${player.getNumber()}"/>
-									    	<p2 th:text="'Id_Druzyny: ' + ${player.team.getId_team()}"/>
-									    </li>
+									    <table border="1" class="center">
+									    <tr>
+									    	<td>Imie i Nazwisko</td>
+									    	<td>Numer</td>
+									    	<td>Pozycja</td>
+									    	<td>Wiek</td>
+									    	<td>Nazwa Drużyny</td>
+									    	<td></td>
+									    </tr>
+									    <tr th:each="player : ${playerList}">
+										    <td><a th:text="${player.getName()} + ' ' + ${player.getSurname()}"/></td>
+									    	<td><p2 th:text="${player.getNumber()}"/></td>
+									    	<td><p2 th:text="${player.getPosition()}"/></td>
+									    	<td><p2 th:text="${player.getAge()}"/></td>
+									    	<td><p2 th:text="${player.getTeam().getName()}"/></td>
+									    	<td><div th:if="${session.idTeamUserLogged == player.getTeam().getId_team()}"><a class="error" th:href="@{/delPlayer/}+${player.getId_player()}">USUŃ GRACZA</a></div></td>
+									    </tr>
+									    </table>
 									</ul>
 								</div>
 							</div>
