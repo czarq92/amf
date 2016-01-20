@@ -27,6 +27,7 @@ public class IndexController {
 
 		model.addAttribute("teams", miniTableService.getTopTeamList());
 		model.addAttribute("news", topNewsService.getTopNewsList());
+		System.out.println("TEST REPO");
 		
 		return "index";
 	}
