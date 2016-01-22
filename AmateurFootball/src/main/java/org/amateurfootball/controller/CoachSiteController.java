@@ -55,9 +55,10 @@ public class CoachSiteController {
 		
 		if( id_teamUserLogged != null ){
 			for ( Player p : tmpList ) {
-				
-				if( p.getTeam().getId_team() == id_teamUserLogged ){
-					coachPlayerList.add(p);
+				if(p.getTeam() != null){
+					if( p.getTeam().getId_team() == id_teamUserLogged ){
+						coachPlayerList.add(p);
+					}
 				}
 			}
 			

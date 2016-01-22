@@ -31,7 +31,7 @@ public class Team implements Serializable, Comparable<Team>{
 	@JoinColumn(name = "id_stadium")
 	private Stadium stadium;
 	
-	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<Player> playerList;
 	
 	@OneToMany(mappedBy = "team", fetch = FetchType.LAZY)

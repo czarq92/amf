@@ -72,17 +72,23 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
-						<div class="featured-side">
-							<div class="featured-side-item">
-								<div id="sidebar2">
-									<h4 class="center">Lista Zarejestrowanych Drużyn</h4>
-									<ul>
-									    <li th:each="team : ${teamList}">
-									    	<small class="date"> <div th:text="'Nazwa: ' + ${team.getName()}"/></small>
-									    	<p2 th:text="'Miasto: ' + ${team.getCity()}"/>
-									    </li>
-									</ul>
-								</div>
+						<div class="featured-side-item">
+							<div id="sidebar2">
+								<h4 class="center">Lista Zarejestrowanych Drużyn</h4>
+								<table border="1" class="center">
+									<tr>
+										<td>Nazwa Druzyny</td>
+										<td>Trener</td>
+										<td>Miasto</td>
+										<td>Nazwa Stadionu</td>
+									</tr>
+								    <tr th:each="team : ${teamList}">
+								    	<td><a th:text="${team.getName()}"/></td>
+								    	<td><p2 th:text="${team.getCoach().getName() + ' ' + team.getCoach().getSurname()}"/></td>
+								    	<td><p2 th:text="${team.getCity()}"/></td>
+								    	<td><p2 th:text="${team.getStadium().getName()}"/></td>
+								    </tr>
+								</table>
 							</div>
 						</div>
 					</div>

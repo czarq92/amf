@@ -87,31 +87,12 @@ public class TeamService {
 		}
 	}
 	
-	public void deletePlayerFromTeamPlayerList(Long idTeam, int idPlayer){
+	public void deletePlayerFromTeamPlayerList(int idPlayer){
+		Player player = playerRepository.findOne((long) idPlayer);
 		
-		Team team = teamRepository.findOne(idTeam);
-		Player playerTmp = playerRepository.findOne( (long) idPlayer);
+		player.setTeam(null);
 		
-		List<Player> playerList;
-		
-		int indexOfFindedPLayer;
-		
-		
-		playerList = team.getPlayerList();
-		
-		System.out.println("Before Delete: " + playerList.toString());
-		
-		indexOfFindedPLayer = playerList.indexOf(playerTmp);
-		
-		if(indexOfFindedPLayer >= 0){
-			playerList.remove(indexOfFindedPLayer);
-
-			System.out.println("After Delete: " + playerList.toString());
-
-			team.setPlayerList(playerList);
-			teamRepository.save(team);
-		}
+		playerRepository.save(player);
 	}
-	
 	
 }

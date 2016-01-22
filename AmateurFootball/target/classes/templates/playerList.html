@@ -83,9 +83,9 @@
 									    <table border="1" class="center">
 									    <tr>
 									    	<td>Imie i Nazwisko</td>
-									    	<td>Numer</td>
+									    	<td>Numer Gracza</td>
 									    	<td>Pozycja</td>
-									    	<td>Wiek</td>
+									    	<td>Wiek Gracza</td>
 									    	<td>Nazwa Drużyny</td>
 									    	<td></td>
 									    </tr>
@@ -93,9 +93,15 @@
 										    <td><a th:text="${player.getName()} + ' ' + ${player.getSurname()}"/></td>
 									    	<td><p2 th:text="${player.getNumber()}"/></td>
 									    	<td><p2 th:text="${player.getPosition()}"/></td>
-									    	<td><p2 th:text="${player.getAge()}"/></td>
-									    	<td><p2 th:text="${player.getTeam().getName()}"/></td>
-									    	<td><div th:if="${session.idTeamUserLogged == player.getTeam().getId_team()}"><a class="error" th:href="@{/delPlayer/}+${player.getId_player()}">USUŃ GRACZA Z DRUŻYNY</a></div></td>
+									    	<td><p2 th:text="${player.getAge()} + ' lat'"/></td>
+									    	<div th:if="${player.getTeam() != null}">
+									    		<td><p2 th:text="${player.getTeam().getName()}"/></td>
+									    		<td><div th:if="${session.idTeamUserLogged == player.getTeam().getId_team()}"><a class="error" th:href="@{/delPlayer/}+${player.getId_player()}">USUŃ GRACZA Z DRUŻYNY</a></div></td>
+									    	</div>
+									    	<div th:if="${player.getTeam() == null}">
+									    		<td></td>
+									    		<td></td>
+									    	</div>
 									    </tr>
 									    </table>
 									</ul>

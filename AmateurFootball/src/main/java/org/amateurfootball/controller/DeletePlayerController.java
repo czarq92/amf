@@ -23,9 +23,7 @@ public class DeletePlayerController {
 			return "redirect:/index";
 		}
 		
-		Long teamUserId = (Long) session.getAttribute("idTeamUserLogged");
-		
-		teamService.deletePlayerFromTeamPlayerList(teamUserId, idPlayer);
+		teamService.deletePlayerFromTeamPlayerList(idPlayer);
 		
 		return "redirect:/playerList";
 	}

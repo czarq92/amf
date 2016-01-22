@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 @Entity
