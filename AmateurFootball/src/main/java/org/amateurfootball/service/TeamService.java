@@ -2,6 +2,7 @@ package org.amateurfootball.service;
 
 import org.amateurfootball.model.Player;
 import org.amateurfootball.model.Team;
+import org.amateurfootball.repository.PlayerRepository;
 import org.amateurfootball.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class TeamService {
 
 	@Autowired
 	private TeamRepository teamRepository;
+	@Autowired
+	private PlayerRepository playerRepository;
 	
 	public int findStadiumIdByTeamId(int searched_id){
 		for (Team team : teamRepository.findAll()) {
@@ -85,26 +88,30 @@ public class TeamService {
 	}
 	
 	public void deletePlayerFromTeamPlayerList(Long idTeam, int idPlayer){
+		
 		Team team = teamRepository.findOne(idTeam);
+		Player playerTmp = playerRepository.findOne( (long) idPlayer);
 		
-		List<Player> playerList = team.getPlayerList();
-		int i = 0;
+		List<Player> playerList;
 		
-		for (Player player : playerList) {
-			int idPlayerTmp = toIntExact(player.getId_player());
-			
-			if(idPlayerTmp == idPlayer){
-				playerList.remove(i);
-				break;
-			}
-			i++;
+		int indexOfFindedPLayer;
+		
+		
+		playerList = team.getPlayerList();
+		
+		System.out.println("Before Delete: " + playerList.toString());
+		
+		indexOfFindedPLayer = playerList.indexOf(playerTmp);
+		
+		if(indexOfFindedPLayer >= 0){
+			playerList.remove(indexOfFindedPLayer);
+
+			System.out.println("After Delete: " + playerList.toString());
+
+			team.setPlayerList(playerList);
+			teamRepository.save(team);
 		}
-		
-		System.out.println(playerList.toString());
-		
-		team.setPlayerList(playerList);
-		teamRepository.save(team);
-		
 	}
+	
 	
 }

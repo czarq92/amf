@@ -1,8 +1,9 @@
 package org.amateurfootball.controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.amateurfootball.model.Player;
 import org.amateurfootball.repository.PlayerRepository;
@@ -16,10 +17,10 @@ public class PlayerListController {
 
 	@Autowired
 	private PlayerRepository playerRepository;
-	
+
 	@RequestMapping(value = "/playerList")
-	public String playerListReturn(Model model){
-		List<Player> playersList = new ArrayList<>();
+	public String playerListReturn(Model model, HttpSession session){
+		List<Player> playersList;
 		
 		playersList = playerRepository.findAll();
 		
