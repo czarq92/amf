@@ -58,7 +58,7 @@ public class EditPlayerController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String editPlayerSubmit(@Valid @ModelAttribute("player") Player player, 
+	public String editPlayerSubmit(@Valid @ModelAttribute("player") Player player,
 			BindingResult bindingResult){
 		
 		if(bindingResult.hasErrors()) {

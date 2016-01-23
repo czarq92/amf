@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "STADIUM")
@@ -13,8 +14,11 @@ public class Stadium implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id_stadium;
+	@Size(min=4, max=20, message = "Nazwa musi zawierać od 4 do 20 znaków!")
 	private String name;
+	@Size(min=3, max=20, message = "Miasto musi zawierać od 3 do 20 znaków!")
 	private String city;
+	@Size(min=4, max=20, message = "Adres musi zawierać od 4 do 20 znaków!")
 	private String address;
 
 	@OneToMany(mappedBy = "stadium", fetch = FetchType.LAZY)

@@ -37,13 +37,21 @@
 				<option th:each="st : ${stadium}" th:value="${st.id_stadium}" th:text="${st.getName()} + ' (' + ${st.getCity()} + ')'"/>
 			</select>
 			<p></p>
-			<input type="submit" class="button button-submit" value="Rejestruj"/>
+			<input type="reset" id="add" class="button2 button-add" value="Dodaj Stadion"/>
+			<p></p>
+			<input type="submit" class="button button-submit" value="REJESTRUJ"/>
 		</form>
-		
 		<div class="help">
 			<p class="coachSite"><a href="coachSite">Strona TRENERA</a></p>
 			<p class="index"><a href="index">Strona Główna</a></p>
 		</div>	
 	</div>
+	
+	<script type="text/javascript">
+	    document.getElementById("add").onclick = function () {
+	        location.href = "/addStadium";
+	    };
+	</script>
+	
  </body>
 </html>

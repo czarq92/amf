@@ -103,6 +103,16 @@ body {
   border-radius: 5px;
 }
 
+.button2 {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 5px;
+}
+
 .button-submit {
   border: 1px solid #3079ed;
   border: 0px;
@@ -116,6 +126,21 @@ body {
   border: 0px;
   text-shadow: 0 1px rgba(0,0,0,0.3);
   background-color: #97DE00;
+}
+
+.button-add {
+  border: 1px solid #3079ed;
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #51a8ff;
+}
+
+.button-add:hover {
+  border: 1px solid white;
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #0080ff;
 }
 
 .card a {

@@ -73,12 +73,12 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
-						<div class="cl">&nbsp;</div>
-						
 						<div class="featured-side">
 							<div class="featured-side-item">
 								<div id="sidebar2">
 									<h4 class="center">Lista Graczy</h4>
+									<hr></hr>
+									<div class="error center" th:if="${session.nameUserLogged != null}">! UWAGA !<br></br> Usunięcie gracza spowoduje nieodwracalne wydalenie gracza z Twojej drużyny!!</div>
 									<ul>
 									    <table border="1" class="center">
 									    <tr>
