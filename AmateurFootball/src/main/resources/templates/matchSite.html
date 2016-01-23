@@ -81,8 +81,7 @@
 											<td>Wynik</td>
 											<td>Stadion</td>
 											<td>Zdarzenie</td>
-											<td>Szczegóły</td>
-											<td>Edytuj Szczegóły</td>
+											<td></td>
 										</tr> 
 										<tr th:each="match : ${matches}">
 											<div th:each="team : ${teams}"> 
@@ -105,10 +104,8 @@
 												<td th:text="${stadium.getName() + '(' + stadium.getCity() + ')'}"/>
 											</div>
 											
-<!-- 											<td><button onclick="addFunction()" id="add" th:value="${match.getId_match()}">Dodaj</button></td> -->
 											<td><a th:href="@{/addEvent/}+${match.getId_match()}">DODAJ</a></td>
-											<td><input type="button" value="Pokaż"/></td>
-											<td><input type="button" value="Edytuj"/></td>
+											<td><a th:href="@{/showMatchDetails/}+${match.getId_match()}">SZCZEGÓŁY</a></td>
 										</tr> 
 									</table>
 								</div>
