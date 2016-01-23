@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Stadion</title>
+	<link rel="stylesheet" href="css/style_card_reg.css" type="text/css" media="all" />
+</head>
+
+ <body>
+	<div class="card">
+		<h1>Dodaj Stadion</h1>
+		
+		<form action="#" th:action="@{/addStadium}" th:object="${stadium}" method="post">
+			<div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+			<input type="text" th:field="*{name}" placeholder="Nazwa Stadionu" th:class="${#fields.hasErrors('name')}? 'error'" /><br/>
+			
+			<div class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"/>	
+			<input type="text" th:field="*{city}" placeholder="Miasto" th:class="${#fields.hasErrors('city')}? 'error'"/><br/>
+	
+			<div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"/>	
+			<input type="text" th:field="*{address}" placeholder="Ulica i nr" th:class="${#fields.hasErrors('address')}? 'error'"/><br/>
+			<p></p>
+			
+			<input type="submit" class="button button-submit" value="ZATWIERDŹ"/>
+		</form>
+		
+		<div class="help">
+			<p class="coachSite"><a href="coachSite">Strona TRENERA</a></p>
+			<p class="index"><a href="index">Strona Główna</a></p>
+		</div>	
+	</div>
+ </body>
+</html>
