@@ -24,7 +24,27 @@ a:hover { text-decoration: underline; cursor: pointer;}
 .error { 
 	color: #FD0000;
 	font-weight: 800;
- } 
+ }
+ 
+.green {
+	color: #2dff2d;
+	font-weight: 800;
+} 
+
+.blue {
+	color: #00ffff;
+	font-weight: 800;
+} 
+
+.yellow {
+	color: #ffff00;
+	font-weight: 800;
+} 
+
+.orange {
+	color: #ffa722;
+	font-weight: 800;
+}
 
 div.container4 {
     top: 50%;

@@ -31,14 +31,6 @@ public class CoachSiteController {
 	public void initialize(HttpSession session){
 		List<Player> tmpList = playerRepository.findAll();
 		
-//		Player player = playerRepository.findOne((long) 18);
-//		
-//		player.setName("PAWEŁ");
-//		
-//		playerRepository.save(player);
-//		
-//		System.out.println("Imie po zapisie do obiektu = " + player.getName());
-		
 		coachPlayerList = new ArrayList<>();
 		
 		String tmpLogin = (String) session.getAttribute("nameUserLogged");

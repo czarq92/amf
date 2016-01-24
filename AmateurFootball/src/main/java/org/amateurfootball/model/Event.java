@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "EVENT")
-public class Event implements Serializable{
+public class Event implements Serializable, Comparable<Event>{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -74,6 +74,13 @@ public class Event implements Serializable{
 	public String toString() {
 		return "Event [id_event=" + id_event + ", id_player=" + player.getId_player() + ", event_time="
 				+ event_time + ", event_type=" + event_type + ", id_match=" + match.getId_match() + "]";
+	}
+	
+	@Override
+	public int compareTo(Event comparedEvent) {
+		int compareEvent = (comparedEvent).getEvent_time();
+		
+		return this.event_time-compareEvent;
 	}
 
 }
