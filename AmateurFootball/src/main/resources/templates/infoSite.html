@@ -2,9 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Lista Druzyn</title>
+	<title>Archiwum</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
-	<!--[if lte IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
 </head>
 <body>
 	<!-- Header -->
@@ -23,7 +22,7 @@
 			<div class="cl">&nbsp;</div>
 			<ul>
 				<li><a href="index">Aktualności</a></li>
-				<li><a href="teamList">Drużyny</a></li>
+				<li><a href="#">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="#">Wyniki</a></li>
 			    <li><a href="#">Harmonogram</a></li>
@@ -49,22 +48,15 @@
 	<div id="heading">
 		<div class="shell">
 			<div id="heading-cnt">
+				
 				<!-- Sub nav -->
 				<div id="side-nav">
 					<ul>
 					    <li class="active"><div class="link"><a href="index">Strona Główna</a></div></li>
-					    <li><div th:if="${session.nameUserLogged == null}">
-					    		<a href="registration" class="link">Załóż konto Trenera!</a>
-					    	</div>
-					    	<div th:if="${session.nameUserLogged == 'admin'}">
-					    		<a href="admin" class="link">Strona ADMINA</a>
-					    	</div>
-					    	<div th:if="${session.nameUserLogged != null}">
-					    		<a href="coachSite" class="link">Strona TRENERA</a>
-					    	</div></li>
-					    <li><div class="link"><a href="#">Informacje o stronie</a></div></li>
+					    <li><div class="link"><a href="registration">Załóż konto Trenera</a></div></li>
+					    <li><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
 					    <li><div class="link"><a href="#">POMOC</a></div></li>
-			    	    <li><div class="link"><a href="#">KONTAKT</a></div></li>
+			    	    <li><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->
@@ -72,30 +64,25 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
-						<div class="featured-side-item">
-							<div id="sidebar2">
-								<h4 class="center">Lista Zarejestrowanych Drużyn</h4>
-								<hr></hr>
-								<div class="error center" th:if="${session.nameUserLogged != null}">Przy drużynie którą trenujesz pojawi się opcja "EDYTUJ DRUŻYNĘ"</div>
-								<br></br>
-								<table border="1" class="center">
-									<tr>
-										<td><b>Nazwa Druzyny</b></td>
-										<td><b>Trener</b></td>
-										<td><b>Miasto</b></td>
-										<td><b>Nazwa Stadionu</b></td>
-										<td></td>
-									</tr>
-								    <tr th:each="team : ${teamList}">
-								    	<td><a th:text="${team.getName()}"/></td>
-								    	<td><a class="blue" th:text="${team.getCoach().getName() + ' ' + team.getCoach().getSurname()}"/></td>
-								    	<td><p2 th:text="${team.getCity()}"/></td>
-								    	<td><p2 th:text="${team.getStadium().getName()}"/></td>
-								    	<td><div th:if="${session.idTeamUserLogged == team.getId_team()}"><a th:href="@{/editTeam/}+${team.getId_team()}">EDYTUJ DRUŻYNĘ</a></div></td>
-								    </tr>
-								</table>
+						<div class="featured-side">
+							<div class="featured-side-item">
+								<div id="sidebar2" class="center">
+									<h1 class="green">Informacje o Stronie</h1><hr></hr>
+									<p2><br></br>
+										Strona powstała w wyniku realizacji projektu pracy inżynierskiej na <b>Politechnice Białostockiej</b>.
+										<br></br><br></br>
+									</p2>
+									<h2 class="blue">Cel</h2><hr></hr>
+									<p2><br></br>
+										Głównym celem systemu jest pomoc w <b>organizacji amatorskich rozgrywek piłki nożnej</b>.<br></br>
+										Polega to na dostarczeniu przejrzystego i prostego w obsłudze interfejsu oraz formularzy niezbędnych do stworzenia zespołu, członków oraz zgłoszenia drużyny do amatorskich rozgrywek.<br></br><br></br>
+										Ponadto system oferuje wiele możliwości takich jak: <b>edycja danych drużyny</b>, <b>edycję danych graczy</b>, <b>możliwość zgłoszenia drużyny na dany termin</b> oraz <b>wprowadzanie zdarzeń po zakończonych meczach</b> dla konta <b>Trenera</b> oraz dostęp do <b>statystyk</b> i <b>informacji o drużynie</b> dla użytkowników niezalogowanych.
+										<br></br><br></br>
+									</p2>
+								</div>
 							</div>
 						</div>
+						<div class="cl">&nbsp;</div>						
 					</div>
 				</div>
 				<!-- End Widget -->

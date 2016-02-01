@@ -26,6 +26,7 @@ public class IndexController {
 	public String index(Model model){
 
 		model.addAttribute("teams", miniTableService.getTopTeamList());
+		model.addAttribute("players", miniTableService.getTopPlayerList());
 		model.addAttribute("news", topNewsService.getTopNewsList());
 		
 		return "index";
@@ -34,6 +35,11 @@ public class IndexController {
 	@RequestMapping(value = "/contact")
 	public String contact(){
 		return "contact";
+	}
+	
+	@RequestMapping(value = "/infoSite")
+	public String infoAboutSite(){
+		return "infoSite";
 	}
 	
 }

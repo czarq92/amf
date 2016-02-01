@@ -77,18 +77,18 @@
 								<h4 class="center">Lista Zarejestrowanych Drużyn</h4>
 								<hr></hr>
 								<div class="error center" th:if="${session.nameUserLogged != null}">Przy drużynie którą trenujesz pojawi się opcja "EDYTUJ DRUŻYNĘ"</div>
-								
+								<br></br>
 								<table border="1" class="center">
 									<tr>
-										<td>Nazwa Druzyny</td>
-										<td>Trener</td>
-										<td>Miasto</td>
-										<td>Nazwa Stadionu</td>
+										<td><b>Nazwa Druzyny</b></td>
+										<td><b>Trener</b></td>
+										<td><b>Miasto</b></td>
+										<td><b>Nazwa Stadionu</b></td>
 										<td></td>
 									</tr>
 								    <tr th:each="team : ${teamList}">
 								    	<td><a th:text="${team.getName()}"/></td>
-								    	<td><p2 th:text="${team.getCoach().getName() + ' ' + team.getCoach().getSurname()}"/></td>
+								    	<td><a class="blue" th:text="${team.getCoach().getName() + ' ' + team.getCoach().getSurname()}"/></td>
 								    	<td><p2 th:text="${team.getCity()}"/></td>
 								    	<td><p2 th:text="${team.getStadium().getName()}"/></td>
 								    	<td><div th:if="${session.idTeamUserLogged == team.getId_team()}"><a th:href="@{/editTeam/}+${team.getId_team()}">EDYTUJ DRUŻYNĘ</a></div></td>

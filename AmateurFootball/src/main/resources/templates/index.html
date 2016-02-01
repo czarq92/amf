@@ -62,7 +62,7 @@
 					    <li th:if="${session.nameUserLogged != null}">
 					    	<a href="coachSite" class="link">Strona TRENERA</a>
 					    </li>
-					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">Informacje o stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
 					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">POMOC</a></div></li>
 			    	    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
@@ -72,32 +72,30 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
-						<div class="cl">&nbsp;</div>
-						
-						<!-- Main Slide Item -->
 						<div class="featured-main">
+						
 							<img src="images/featured-main.jpg"/>
+							
 							<div class="featured-main-details">
 								<div class="featured-main-details-cnt">									
 									<h4>Informacje o nadchodzacych meczach</h4>
+									
 									<p>Juz niebawem, mecz ligi podworkowej !</p>
 								</div>
 							</div>
 						</div>
-						<!-- End Main Slide Item -->
 						
 						<div class="featured-side">
-							<!-- Slide Item 1 -->
 							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<h4 class="center">Mini Tabela</h4>
-								<p>
+
+								<h4 class="center">Mini Tabela Drużyn</h4>
+								
 									<table border="1" class="center">
 										<tr>
-											<td>Miejsce</td>
-											<td>Drużyna</td>
-											<td>Bramki <br></br>(T : S)</td>
-											<td>Punkty</td>
+											<td><b>Miejsce</b></td>
+											<td><b>Nazwa Drużyny</b></td>
+											<td><b>Bramki<br></br>(Trafione:Stracone)</b></td>
+											<td><b>Pkt</b></td>
 										</tr> 
 										<tr th:each="team : ${teams}">
 											<td th:text="${team.getRanked()}"/>
@@ -105,12 +103,28 @@
 											<td th:text=" '(' + ${team.getGoals_hit()} + ' : ' + ${team.getGoals_lost() + ')'}" />
 											<td th:text="${team.getPoints()}"/>
 										</tr> 
+									</table><br></br>
+							
+									<h4 class="center">Mini Tabela Strzelców</h4>
+									
+									<table border="1" class="center">
+										<tr>
+											<td><b>Miejsce</b></td>
+											<td><b>Imie i Nazwisko</b></td>
+											<td><b>Num</b></td>
+											<td><b>Bramki</b></td>
+											
+										</tr> 
+										<tr th:each="player : ${players}">
+											<td th:text="${player.getRanked()}"/>
+											<td th:text="${player.getName()}"/>
+											<td th:text="${player.getNumber()}"/>
+											<td th:text="${player.getGoals()}"/>
+										</tr> 
 									</table>
-								</p>
-								<div class="cl">&nbsp;</div>
 							</div>
-							<!-- End Slide Item 1 -->
 						</div>
+						
 						<div class="cl">&nbsp;</div>						
 					</div>
 				</div>

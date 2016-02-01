@@ -14,9 +14,9 @@ public class Team implements Serializable, Comparable<Team>{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id_team;
-	@Size(min=4, max=20, message = "Nazwa powinna zawierać od 4 do 20 znaków.")
+	@Size(min=4, max=10, message = "Nazwa powinna zawierać od 4 do 10 znaków.")
 	private String name;
-	@Size(min=4, max=20, message = "Miasto powinno zawierać od 4 do 20 znaków.")
+	@Size(min=4, max=20, message = "Miasto powinno zawierać od 4 do 14 znaków.")
 	private String city;
 	private int goals_hit;
 	private int goals_lost;
