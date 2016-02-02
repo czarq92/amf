@@ -52,8 +52,19 @@
 				<!-- Sub nav -->
 				<div id="side-nav">
 					<ul>
-					    <li><div class="link"><a href="index">Strona Główna</a></div></li>
-					    <li><div class="link"><a href="coachSite">Strona TRENERA</a></div></li>
+					    <li class="active"><div class="link"><a href="index">Strona Główna</a></div></li>
+					    <li th:if="${session.nameUserLogged == null}">
+					    	<a href="registration" class="link">Załóż konto Trenera!</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged == 'admin'}">
+					    	<a href="admin" class="link">Strona ADMINA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != null}">
+					    	<a href="coachSite" class="link">Strona TRENERA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">POMOC</a></div></li>
+			    	    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->
@@ -63,25 +74,19 @@
 					<div id="heading-box-cnt">
 						<div class="cl">&nbsp;</div>
 						
-						<div th:if="${emptyListInfo == true}">
-							<p class="error center">Twoja drużyna nie rozegrała jeszcze żadnego meczu!</p>
-						</div>
-						
 						<div class="featured-side">
 							<div class="featured-side-item">
 								<div id="sidebar2">
-									<h4 class="center">Lista Rozegranych Meczy</h4>
+									<h4 class="center">Wyniki Rozegranych Meczy</h4>
 										
 								    <table border="1" class="center">
 										<tr>
-											<td>Drużyna A</td>
-											<td>Drużyna B</td>
-											<td>Data</td>
-											<td>Godzina</td>
-											<td>Wynik</td>
-											<td>Stadion</td>
-											<td>Zdarzenie</td>
-											<td></td>
+											<td><b>Nazwa Drużyny Pierwszej</b></td>
+											<td><b>Nazwa Drużyny Drugiej</b></td>
+											<td><b>Data</b></td>
+											<td><b>Godzina</b></td>
+											<td><b>Wynik</b></td>
+											<td><b>Stadion (Miasto)</b></td>
 										</tr> 
 										<tr th:each="match : ${matches}">
 											<div th:each="team : ${teams}"> 
@@ -105,13 +110,7 @@
 											</div>
 											
 											<div th:each="stadium : ${stadiums}" th:if="${stadium.getId_stadium() == match.stadium.getId_stadium()}" >
-												<td th:text="${stadium.getName() + '(' + stadium.getCity() + ')'}"/>
-											</div>
-											
-											<td><a th:href="@{/addEvent/}+${match.getId_match()}">DODAJ</a></td>
-											
-											<div th:if="${match.getMatchStatistics() != null}">
-												<td><a th:href="@{/matchDetails/}+${match.getId_match()}">SZCZEGÓŁY</a></td>
+												<td th:text="${stadium.getName() + ' (' + stadium.getCity() + ')'}"/>
 											</div>
 										</tr> 
 									</table>
@@ -141,13 +140,5 @@
 		</div>
 	</div>
 	<!-- End Footer -->
-	
-	<script type="text/javascript">
-		function addFunction() {
-			var x = document.getElementById("add").value;
-			location.href = "/addEvent/"+x;
-		}
-	</script>
-	
 </body>
 </html>

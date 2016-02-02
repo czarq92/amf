@@ -25,6 +25,19 @@ public class MatchService {
 		int goals = 0;
 		String resultMatch = "";
 		
+		System.out.println(matchStat);
+		
+		if(matchStat == null) {
+			matchStat = new MatchStatistics();
+			
+			matchStat.setMatch(matchRepository.findOne(matchId));
+			matchStat.setFirst_team_goals(0);
+			matchStat.setSecond_team_goals(0);
+			matchStat.setResult_match("0:0");
+			
+			matchStatisticsRepository.save(matchStat);
+		}
+		
 		if(whichTeam == "first"){
 			goals = matchStat.getFirst_team_goals();
 			goals += 1;

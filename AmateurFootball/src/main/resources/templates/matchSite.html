@@ -100,12 +100,19 @@
 												<td th:text="${matchStat.getResult_match()}"/>
 											</div>
 											
+											<div th:if="${match.getMatchStatistics() == null}">
+												<td>- : -</td>
+											</div>
+											
 											<div th:each="stadium : ${stadiums}" th:if="${stadium.getId_stadium() == match.stadium.getId_stadium()}" >
 												<td th:text="${stadium.getName() + '(' + stadium.getCity() + ')'}"/>
 											</div>
 											
 											<td><a th:href="@{/addEvent/}+${match.getId_match()}">DODAJ</a></td>
-											<td><a th:href="@{/matchDetails/}+${match.getId_match()}">SZCZEGÓŁY</a></td>
+											
+											<div th:if="${match.getMatchStatistics() != null}">
+												<td><a th:href="@{/matchDetails/}+${match.getId_match()}">SZCZEGÓŁY</a></td>
+											</div>
 										</tr> 
 									</table>
 								</div>
@@ -140,9 +147,6 @@
 			var x = document.getElementById("add").value;
 			location.href = "/addEvent/"+x;
 		}
-// 	    document.getElementById("add").onclick = function () {
-// 	        location.href = "/addEvent" + doc;
-// 	    };
 	</script>
 	
 </body>
