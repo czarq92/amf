@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Archiwum</title>
+	<title>AmateurFootball</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 </head>
 <body>
@@ -27,7 +28,6 @@
 			    <li><a href="matchResults">Wyniki</a></li>
 			    <li><a href="matchSchedule">Harmonogram</a></li>
 			    <li><a href="#">Statystyki</a></li>
-			    <li><a href="registration">REJESTRACJA</a></li>
 			    <li>
 				    <a href="login">
 				    	<div th:if="${session.nameUserLogged == null}">Zaloguj się</div>
@@ -53,10 +53,18 @@
 				<div id="side-nav">
 					<ul>
 					    <li class="active"><div class="link"><a href="index">Strona Główna</a></div></li>
-					    <li><div class="link"><a href="registration">Załóż konto Trenera</a></div></li>
-					    <li><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
-					    <li><div class="link"><a href="#">POMOC</a></div></li>
-			    	    <li><div class="link"><a href="contact">KONTAKT</a></div></li>
+					    <li th:if="${session.nameUserLogged == null}">
+					    	<a href="registration" class="link">Załóż konto Trenera!</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged == 'admin'}">
+					    	<a href="admin" class="link">Strona ADMINA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != null}">
+					    	<a href="coachSite" class="link">Strona TRENERA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">POMOC</a></div></li>
+			    	    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->
@@ -64,21 +72,39 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
+						<div class="cl">&nbsp;</div>
+						
 						<div class="featured-side">
 							<div class="featured-side-item">
-								<div id="sidebar2" class="center">
-									<h1 class="green">Informacje o Stronie</h1><hr></hr>
-									<p2><br></br>
-										Strona powstała w wyniku realizacji projektu pracy inżynierskiej na <b>Politechnice Białostockiej</b>.
-										<br></br><br></br>
-									</p2>
-									<h2 class="blue">Cel</h2><hr></hr>
-									<p2><br></br>
-										Głównym celem systemu jest pomoc w <b>organizacji amatorskich rozgrywek piłki nożnej</b>.<br></br>
-										Polega to na dostarczeniu przejrzystego i prostego w obsłudze interfejsu oraz formularzy niezbędnych do stworzenia zespołu, członków oraz zgłoszenia drużyny do amatorskich rozgrywek.<br></br><br></br>
-										Ponadto system oferuje wiele możliwości takich jak: <b>edycja danych drużyny</b>, <b>edycję danych graczy</b>, <b>możliwość zgłoszenia drużyny na dany termin</b> oraz <b>wprowadzanie zdarzeń po zakończonych meczach</b> dla konta <b>Trenera</b> oraz dostęp do <b>statystyk</b> i <b>informacji o drużynie</b> dla użytkowników niezalogowanych.
-										<br></br><br></br>
-									</p2>
+								<div id="sidebar2">
+									<h4 class="center">Harmonogram Nadchodzących Meczy</h4>
+										<br></br>
+								    <table border="1" class="center">
+										<tr>
+											<td><b>Nazwa Drużyny Pierwszej</b></td>
+											<td><b>Nazwa Drużyny Drugiej</b></td>
+											<td><b>Data</b></td>
+											<td><b>Godzina</b></td>
+											<td><b>Stadion (Miasto)</b></td>
+										</tr> 
+										<tr th:each="match : ${matches}">
+											<div th:each="team : ${teams}"> 
+												<div th:if="${team.getId_team() == match.getFirst_team_id()}">
+													<td><a th:text="${team.getName()}"/></td>
+												</div>
+												<div th:if="${team.getId_team() == match.getSecond_team_id()}"> 
+													<td><a th:text="${team.getName()}"/></td>
+												</div>
+											</div>
+											
+											<td th:text="${match.getDate()}" />
+											<td th:text="${match.getHour()}"/>
+
+											<div th:each="stadium : ${stadiums}" th:if="${stadium.getId_stadium() == match.stadium.getId_stadium()}" >
+												<td th:text="${stadium.getName() + ' (' + stadium.getCity() + ')'}"/>
+											</div>
+										</tr> 
+									</table>
 								</div>
 							</div>
 						</div>
@@ -86,29 +112,21 @@
 					</div>
 				</div>
 				<!-- End Widget -->
+				
 			</div>			
 		</div>
 	</div>
 	<!-- End Heading -->
 	
-	<!-- Main -->
 	<div id="main">
-		<div class="shell">		
-			<div class="cl">&nbsp;</div>	
-			<div id="content">
-				<div class="cl">&nbsp;</div>
-			</div>
-			<div class="cl">&nbsp;</div>
-		</div>
 	</div>
-		<!-- End Main -->
 	
 	<!-- Footer -->
 	<div id="footer">
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<!-- <a href="#" class="left">PRIVACY POLICY</a> -->
-				<p class="center">System powstał w wyniku realizacji pracy dyplomowej na Wydziale Informatyki Politechniki Białostockiej. </p>
+				<p class="center">System powstal w wyniku realizacji pracy dyplomowej na Wydziale Informatyki Politechniki Bialostockiej. </p>
 			<div class="cl">&nbsp;</div>
 		</div>
 	</div>
