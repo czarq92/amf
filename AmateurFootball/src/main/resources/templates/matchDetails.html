@@ -23,13 +23,13 @@
 			<div class="cl">&nbsp;</div>
 			<ul>
 				<li><a href="/index">Aktualności</a></li>
-				<li><a href="#">Drużyny</a></li>
+				<li><a href="/teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
-			    <li><a href="matchResults">Wyniki</a></li>
-			    <li><a href="matchSchedule">Harmonogram</a></li>
+			    <li><a href="/matchResults">Wyniki</a></li>
+			    <li><a href="/matchSchedule">Harmonogram</a></li>
 			    <li><a href="#">Statystyki</a></li>
 			    <li>
-				    <a href="login">
+				    <a href="/login">
 				    	<div th:if="${session.nameUserLogged == null}">Zaloguj się</div>
 				    	<a th:if="${session.nameUserLogged != null}">
 				    		<a href="/logout">
@@ -53,8 +53,19 @@
 				<div id="side-nav">
 					<ul>
 					    <li><div class="link"><a href="/index">Strona Główna</a></div></li>
-					    <li><div class="link"><a href="/coachSite">Strona TRENERA</a></div></li>
-					    <li><div class="link"><a href="/matchSite">Mecze</a></div></li>
+					    <li th:if="${session.nameUserLogged == null}">
+					    	<a href="registration" class="link">Załóż konto Trenera!</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged == 'admin'}">
+					    	<a href="admin" class="link">Strona ADMINA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != null}">
+					    	<a href="coachSite" class="link">Strona TRENERA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged == null}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged == null}"><div class="link"><a href="#">POMOC</a></div></li>
+			    	    <li th:if="${session.nameUserLogged == null}"><div class="link"><a href="contact">KONTAKT</a></div></li>
+					    <li th:if="${session.nameUserLogged != null}"><div class="link"><a href="/matchSite">Mecze</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->

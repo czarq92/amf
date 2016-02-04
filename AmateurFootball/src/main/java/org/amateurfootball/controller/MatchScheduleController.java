@@ -1,7 +1,6 @@
 package org.amateurfootball.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,15 +11,10 @@ import org.amateurfootball.repository.StadiumRepository;
 import org.amateurfootball.repository.TeamRepository;
 import org.amateurfootball.service.DateService;
 import org.amateurfootball.service.TabConvertService;
-import org.parboiled.MatchHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.mysql.fabric.xmlrpc.base.Array;
-
-import scala.collection.mutable.LinkedList;
 
 @Controller
 public class MatchScheduleController {

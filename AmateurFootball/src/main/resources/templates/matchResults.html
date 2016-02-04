@@ -23,7 +23,7 @@
 			<div class="cl">&nbsp;</div>
 			<ul>
 				<li><a href="index">Aktualności</a></li>
-				<li><a href="#">Drużyny</a></li>
+				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
 			    <li><a href="matchSchedule">Harmonogram</a></li>
@@ -81,12 +81,13 @@
 										
 								    <table border="1" class="center">
 										<tr>
-											<td><b>Nazwa Drużyny Pierwszej</b></td>
-											<td><b>Nazwa Drużyny Drugiej</b></td>
+											<td><b>Nazwa Drużyny</b></td>
+											<td><b>Nazwa Drużyny</b></td>
 											<td><b>Data</b></td>
 											<td><b>Godzina</b></td>
 											<td><b>Wynik</b></td>
 											<td><b>Stadion (Miasto)</b></td>
+											<td></td>
 										</tr> 
 										<tr th:each="match : ${matches}">
 											<div th:each="team : ${teams}"> 
@@ -106,11 +107,17 @@
 											</div>
 											
 											<div th:if="${match.getMatchStatistics() == null}">
-												<td>- : -</td>
+												<td class="error">- : -</td>
 											</div>
 											
 											<div th:each="stadium : ${stadiums}" th:if="${stadium.getId_stadium() == match.stadium.getId_stadium()}" >
 												<td th:text="${stadium.getName() + ' (' + stadium.getCity() + ')'}"/>
+											</div>
+											<div th:if="${match.getMatchStatistics() != null}">
+												<td><a th:href="@{/matchDetails/}+${match.getId_match()}">SZCZEGÓŁY</a></td>
+											</div>
+											<div th:if="${match.getMatchStatistics() == null}">
+												<td class="error">-------------</td>
 											</div>
 										</tr> 
 									</table>

@@ -3,12 +3,9 @@ package org.amateurfootball.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.amateurfootball.model.Coach;
 import org.amateurfootball.model.Team;
-import org.amateurfootball.repository.CoachRepository;
 import org.amateurfootball.repository.StadiumRepository;
 import org.amateurfootball.repository.TeamRepository;
-import org.amateurfootball.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
