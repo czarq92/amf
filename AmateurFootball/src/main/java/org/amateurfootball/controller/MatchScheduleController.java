@@ -48,9 +48,15 @@ public class MatchScheduleController {
 			
 			matchList = new ArrayList<>();
 			
-			if(matchDateTab[0] >= todayDateTab[0] && 
-					matchDateTab[1] >= todayDateTab[1] &&
-					matchDateTab[2] >= todayDateTab[2]){
+			if(matchDateTab[2] == todayDateTab[2]){
+				if(matchDateTab[1] == todayDateTab[1]){
+					if (matchDateTab[0] >= todayDateTab[0]){
+						matchList.add(match);
+					}
+				} else if(matchDateTab[1] > todayDateTab[1]){
+					matchList.add(match);
+				}
+			} else if(matchDateTab[2] > todayDateTab[2]){
 				matchList.add(match);
 			}
 		}

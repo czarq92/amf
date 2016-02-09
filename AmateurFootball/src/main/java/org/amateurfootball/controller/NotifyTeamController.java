@@ -75,17 +75,27 @@ public class NotifyTeamController {
 		
 		dateInTab = tabConvertService.convertStringToIntTab(choosenDate.getDate());
 		 
-		if(dateInTab[0] > dateService.dayToday()){
+		
+		if(dateInTab[2] == dateService.yearToday()){
+			if(dateInTab[1] == dateService.monthToday()){
+				if(dateInTab[0] > dateService.dayToday()){
+//					teamChoosenDateRepository.save(choosenDate);
+				} else {
+					model.addAttribute("wrongDate", true);
+					return "notifyTeam";
+				}
+			} else if(dateInTab[1] > dateService.monthToday()){
+//				teamChoosenDateRepository.save(choosenDate);
+			}
+		} else if(dateInTab[2] > dateService.yearToday()){
 //			teamChoosenDateRepository.save(choosenDate);
-			
-//			1. Wybrana data
-//			2. ID mojej drużyny
-//			verifyData(choosenDate.getDate(), coachTeamId);
-			
-		} else{
-			model.addAttribute("wrongDate", true);
-			return "notifyTeam";
-		}
+		} 
+		
+//		if(dateInTab[0] > dateService.dayToday()){
+////			1. Wybrana data
+////			2. ID mojej drużyny
+////			verifyData(choosenDate.getDate(), coachTeamId);
+//		} 
 		
 		return "redirect:/coachSite";
 	}
