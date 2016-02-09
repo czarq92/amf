@@ -1,5 +1,8 @@
 package org.amateurfootball.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.amateurfootball.model.Team;
@@ -69,26 +72,32 @@ public class NotifyTeamController {
 
 		int[] dateInTab = new int[3];
 		
-		Team findedTeam = teamRepository.findOne(coachTeamId);
+		Team findedCoachTeam = teamRepository.findOne(coachTeamId);
 		
-		choosenDate.setTeam(findedTeam);;
+		choosenDate.setTeam(findedCoachTeam);
 		
 		dateInTab = tabConvertService.convertStringToIntTab(choosenDate.getDate());
-		 
 		
 		if(dateInTab[2] == dateService.yearToday()){
 			if(dateInTab[1] == dateService.monthToday()){
 				if(dateInTab[0] > dateService.dayToday()){
 //					teamChoosenDateRepository.save(choosenDate);
+					
+					
+					
 				} else {
 					model.addAttribute("wrongDate", true);
 					return "notifyTeam";
 				}
 			} else if(dateInTab[1] > dateService.monthToday()){
 //				teamChoosenDateRepository.save(choosenDate);
+				
+				searchOpponentWithTheSameDate(coachTeamId, choosenDate.getDate());
 			}
 		} else if(dateInTab[2] > dateService.yearToday()){
 //			teamChoosenDateRepository.save(choosenDate);
+			
+			
 		} 
 		
 //		if(dateInTab[0] > dateService.dayToday()){
@@ -98,6 +107,22 @@ public class NotifyTeamController {
 //		} 
 		
 		return "redirect:/coachSite";
+	}
+	
+	public void searchOpponentWithTheSameDate(long hostTeamId, String choosenDate){
+		List<TeamChoosenDate> teamDateList = new ArrayList<>();
+		teamDateList = teamChoosenDateRepository.findAll();
+		
+		Team opponentTeam;
+		
+		for (TeamChoosenDate team : teamDateList) {
+			if(hostTeamId != team.getTeam().getId_team() && choosenDate.equals(team.getDate())){
+				System.out.println(team.getTeam().getName());
+				
+				opponentTeam = team.getTeam();
+				break;
+			}
+		}
 	}
 	
 	
