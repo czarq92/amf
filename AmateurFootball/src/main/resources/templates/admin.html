@@ -73,21 +73,16 @@
 				<!-- Widget -->
 				<div id="heading-box">
 					<div id="heading-box-cnt">
-						<div class="cl">&nbsp;</div>
-						
-						<!-- Main Slide Item -->
-						<div class="featured-main">
-							<h2>Formularz dodawania nowości</h2><br></br>
+							<h2 class="blue center">Dodaj Nowość</h2><hr></hr><br></br>
 							
-							<form>
-								Podaj treść nowości:
-								<input type="text"></input>
+							<form class="center" action="#" th:action="@{/addNews}" th:object="${newNews}" method="post">
+								<a class="orange">Treści dodane w poniższym formularzu będą wyświetlane w "Nowościach"</a><br></br><br></br>
 								
-								<button type="submit">DODAJ</button>
+								<div class="error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"/>	
+								<textarea name="message" cols="50" rows="9" wrap="virtual" maxlength="150" placeholder="Wprowadź treść nowości..." required="required" th:field="*{message}" th:class="${#fields.hasErrors('message')}? 'error'"/><br></br>
+								
+								<input type="submit" name="submit" class="button button-submit" value="DODAJ"/>
 							</form>
-							
-						</div>
-						<!-- End Main Slide Item -->
 					</div>
 				</div>
 				<!-- End Widget -->

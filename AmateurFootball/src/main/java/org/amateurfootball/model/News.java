@@ -15,7 +15,7 @@ public class News implements Serializable{
 	private Long id_news;
 	private String date;
 	
-	@Size(min=10, max=100, message = "Wiadomość musi być dłuższa niż 10 i krótsza niż 100 znaków.")
+	@Size(min=10, max=150, message = "Wiadomość musi być dłuższa niż 10 i krótsza niż 150 znaków.")
 	private String message;
 	
 	public News() {
