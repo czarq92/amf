@@ -79,11 +79,14 @@
 							<div class="featured-side-item">
 								<div id="sidebar2">
 									<h4 class="center">Archiwum Nowości</h4>
-									<ul>
+									<ul class="center">
 									    <li th:each="newsObject : ${news}">
 									    	<small class="date"> <div th:text="${newsObject.getDate()}"/></small>
 									    	<p2 th:text="${newsObject.getMessage()}"/>
 									    </li>
+										
+										<input type="reset" id="previous" class="button2 button-switch" value="&lt;&lt;"/>
+										<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/><p></p>
 									</ul>
 								</div>
 							</div>
@@ -110,5 +113,14 @@
 		</div>
 	</div>
 	<!-- End Footer -->
+	
+	<script type="text/javascript">
+	    document.getElementById("previous").onclick = function () {
+	        location.href = "/previous";
+	    };
+	    document.getElementById("next").onclick = function () {
+	        location.href = "/next";
+	    };
+	</script>
 </body>
 </html>
