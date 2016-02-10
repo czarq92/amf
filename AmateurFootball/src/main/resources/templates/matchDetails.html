@@ -57,10 +57,10 @@
 					    	<a href="registration" class="link">Załóż konto Trenera!</a>
 					    </li>
 					    <li th:if="${session.nameUserLogged == 'admin'}">
-					    	<a href="admin" class="link">Strona ADMINA</a>
+					    	<a href="/admin" class="link">Strona ADMINA</a>
 					    </li>
 					    <li th:if="${session.nameUserLogged != null}">
-					    	<a href="coachSite" class="link">Strona TRENERA</a>
+					    	<a href="/coachSite" class="link">Strona TRENERA</a>
 					    </li>
 					    <li th:if="${session.nameUserLogged == null}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
 					    <li th:if="${session.nameUserLogged == null}"><div class="link"><a href="#">POMOC</a></div></li>

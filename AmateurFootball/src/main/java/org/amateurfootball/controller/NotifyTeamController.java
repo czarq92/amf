@@ -42,6 +42,8 @@ public class NotifyTeamController {
 	@Autowired
 	private MatchService matchService;
 	
+	private Team opponentTeam;
+	
 	@RequestMapping(value = "/notifyTeam", method = RequestMethod.GET)
 	public String notifyTeamForm(Model model, HttpSession session){
 		
@@ -83,8 +85,13 @@ public class NotifyTeamController {
 				if(dateInTab[0] > dateService.dayToday()){
 //					teamChoosenDateRepository.save(choosenDate);
 					
-					
-					
+					if( !findOpponent(coachTeamId, choosenDate) ){
+						session.setAttribute("NoOpponent", true);
+						return "redirect:/coachSite";
+					} else {
+						session.setAttribute("NoOpponent", false);
+						return "redirect:/coachSite";
+					}
 				} else {
 					model.addAttribute("wrongDate", true);
 					return "notifyTeam";
@@ -92,37 +99,72 @@ public class NotifyTeamController {
 			} else if(dateInTab[1] > dateService.monthToday()){
 //				teamChoosenDateRepository.save(choosenDate);
 				
-				searchOpponentWithTheSameDate(coachTeamId, choosenDate.getDate());
+				if( !findOpponent(coachTeamId, choosenDate) ){
+					session.setAttribute("NoOpponent", true);
+					return "redirect:/coachSite";
+				} else {
+					session.setAttribute("NoOpponent", false);
+					return "redirect:/coachSite";
+				}
 			}
 		} else if(dateInTab[2] > dateService.yearToday()){
 //			teamChoosenDateRepository.save(choosenDate);
 			
-			
+			if( !findOpponent(coachTeamId, choosenDate) ){
+				session.setAttribute("NoOpponent", true);
+				return "redirect:/coachSite";
+			} else {
+				session.setAttribute("NoOpponent", false);
+				return "redirect:/coachSite";
+			}
 		} 
-		
-//		if(dateInTab[0] > dateService.dayToday()){
-////			1. Wybrana data
-////			2. ID mojej drużyny
-////			verifyData(choosenDate.getDate(), coachTeamId);
-//		} 
-		
 		return "redirect:/coachSite";
 	}
 	
-	public void searchOpponentWithTheSameDate(long hostTeamId, String choosenDate){
-		List<TeamChoosenDate> teamDateList = new ArrayList<>();
+	public boolean findOpponent(long coachTeamId, TeamChoosenDate choosenDate){
+		opponentTeam = searchOpponentWithTheSameDate(coachTeamId, choosenDate.getDate());
+		
+		if (opponentTeam == null){
+			return false;
+		}
+		
+		System.out.println(opponentTeam);
+		return true;
+	}
+	
+	public Team searchOpponentWithTheSameDate(long hostTeamId, String choosenDate){
+		List<TeamChoosenDate> teamDateList;
+		
 		teamDateList = teamChoosenDateRepository.findAll();
 		
-		Team opponentTeam;
+		int attempts = 3;
+		int i = 0;
+		TeamChoosenDate opponentTeamChoosenDate = null;
 		
-		for (TeamChoosenDate team : teamDateList) {
-			if(hostTeamId != team.getTeam().getId_team() && choosenDate.equals(team.getDate())){
-				System.out.println(team.getTeam().getName());
+		opponentTeam = null;
+		
+		boolean finded = false;
+		
+		do {
+			finded = false;
+			++i;
+			opponentTeamChoosenDate = randomTeamService.randomTeam(teamDateList);
+			
+			if(hostTeamId != opponentTeamChoosenDate.getTeam().getId_team() && 
+				choosenDate.equals(opponentTeamChoosenDate.getDate())){
+				finded = true;
 				
-				opponentTeam = team.getTeam();
-				break;
+				return opponentTeamChoosenDate.getTeam();
 			}
-		}
+			
+			if(i == attempts){
+				finded = true;
+			}
+			
+		} while(!finded);
+		
+		
+		return opponentTeam;
 	}
 	
 	

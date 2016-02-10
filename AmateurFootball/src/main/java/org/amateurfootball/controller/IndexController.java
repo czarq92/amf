@@ -16,12 +16,6 @@ public class IndexController {
 	@Autowired
 	private TopNewsService topNewsService;
 	
-//	@RequestMapping(value="/test")
-//	@ResponseBody
-//	Collection<Player> collection(){
-//		return this.playerRepository.findAll();
-//	}
-	
 	@RequestMapping(value={"/", "/index"})
 	public String index(Model model){
 

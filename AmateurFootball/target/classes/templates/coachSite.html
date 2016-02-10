@@ -76,57 +76,17 @@
 								</div>
 							</div>
 						</div>
-						<!-- End Main Slide Item -->
 						
 						<div class="featured-side">
-													
-							<!-- Slide Item 1 -->
 							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-2.jpg" alt="" /></a>
+								<h2 class="center blue">INFORMACJE ZWROTNE</h2><br></br>
 								
-								<h4>Jakieś info</h4>
-								<p> Aaj </p>
-								<div class="cl">&nbsp;</div>
+								<table border="1">
+									<tr th:if="${session.NoOpponent == true}">
+										<td class="error center">Nie znaleziono przeciwnika na wybraną datę !</td>
+									</tr>
+								</table>
 							</div>
-							<!-- End Slide Item 1 -->
-							
-							<!-- Slide Item 2 -->
-							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-1.jpg" alt="" /></a>
-								
-								<h4>Gracze</h4>
-								<p>
-									<table border="1">
-										<tr>
-											<td>Imie</td>
-											<td>Wiek</td>
-											<td>Position</td>
-											<td>Nr</td>
-										</tr> 
-										<tr th:each="player : ${players}">
-											<td th:text="${player.getName()}"/>
-											<td th:text="${player.getAge()}"/>
-											<td th:text="${player.getPosition()}"/>
-											<td th:text="${player.getNumber()}"/>
-										</tr> 
-									</table>
-								</p>
-								<div class="cl">&nbsp;</div>
-							</div>
-							<!-- End Slide Item 2 -->
-							
-							<!-- Slide Item 3 -->
-							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-3.jpg" alt="" /></a>
-								<h4><a href="#">Dolor si atema commodo</a></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque turpis urna</p>
-								<div class="cl">&nbsp;</div>
-							</div>
-							<!-- End Slide Item 3 -->
-
 						</div>
 						<div class="cl">&nbsp;</div>						
 					</div>
@@ -174,8 +134,8 @@
 					<h3>Lista Meczy</h3>
 					<img src="images/gray-box3.jpg" alt=""/>
 					<p>
-						<span>Sprawdź lsitę rozegranych i zaplanowanych meczy!</span>
-						<a href="#" class="button">Sprawdź!</a>
+						<span>Sprawdź listę rozegranych meczy!</span>
+						<a href="matchResults" class="button">Sprawdź!</a>
 					</p>
 				</div>
 			</div>

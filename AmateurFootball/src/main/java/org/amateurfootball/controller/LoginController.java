@@ -48,7 +48,7 @@ public class LoginController {
 					session.setAttribute("idUserLogged", findedId_coach);
 					
 					if(c.getId_coach() == 0){
-						return "admin";
+						return "redirect:/admin";
 					}
 			}
 		}

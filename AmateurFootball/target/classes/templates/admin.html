@@ -22,11 +22,13 @@
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<ul>
-				<li><a href="news">ADMIN</a></li>
-			    <li><a href="#">news &amp; events</a></li>
-			    <li><a href="#">photo gallery</a></li>
-			    <li><a href="#">video gallery</a></li>
-			    <li><a href="#">Rejestracja</a></li>
+				<li><a href="index">Aktualności</a></li>
+				<li><a href="teamList">Drużyny</a></li>
+			    <li><a href="#">Tabele</a></li>
+			    <li><a href="matchResults">Wyniki</a></li>
+			    <li><a href="matchSchedule">Harmonogram</a></li>
+			    <li><a href="#">Statystyki</a></li>
+			    <li><a href="registration">REJESTRACJA</a></li>
 			    <li>
 				    <a href="login">
 				    	<div th:if="${session.nameUserLogged == null}">Zaloguj się</div>
@@ -51,11 +53,19 @@
 				<!-- Sub nav -->
 				<div id="side-nav">
 					<ul>
-					    <li class="active"><div class="link"><a href="/">home</a></div></li>
-					    <li><div class="link"><a href="#">ranking</a></div></li>
-					    <li><div class="link"><a href="#">results</a></div></li>
-					    <li><div class="link"><a href="#">schedules</a></div></li>
-					    <li><div class="link"><a href="#">photo gallery</a></div></li>
+					    <li class="active"><div class="link"><a href="index">Strona Główna</a></div></li>
+					    <li th:if="${session.nameUserLogged == null}">
+					    	<a href="registration" class="link">Załóż konto Trenera!</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged == 'admin'}">
+					    	<a href="admin" class="link">Strona ADMINA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != null}">
+					    	<a href="coachSite" class="link">Strona TRENERA</a>
+					    </li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">POMOC</a></div></li>
+			    	    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->
@@ -67,69 +77,17 @@
 						
 						<!-- Main Slide Item -->
 						<div class="featured-main">
-							<a href="#"><img src="images/featured-main.jpg" alt="" /></a>
-							<div class="featured-main-details">
-								<div class="featured-main-details-cnt">									
-									<h4><a href="#">Informacje o nadchodzacych meczach</a></h4>
-									<p>Juz niebawem, mecz ligi podworkowej !</p>
-								</div>
-							</div>
+							<h2>Formularz dodawania nowości</h2><br></br>
+							
+							<form>
+								Podaj treść nowości:
+								<input type="text"></input>
+								
+								<button type="submit">DODAJ</button>
+							</form>
+							
 						</div>
 						<!-- End Main Slide Item -->
-						
-						<div class="featured-side">
-													
-							<!-- Slide Item 1 -->
-							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-2.jpg" alt="" /></a>
-								
-								<h4>Info o użytkowniku</h4>
-								<p>						
-									<div th:text="${session.nameUserLogged}"/>
-								</p>
-								<div class="cl">&nbsp;</div>
-							</div>
-							<!-- End Slide Item 1 -->
-							
-							<!-- Slide Item 2 -->
-							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-1.jpg" alt="" /></a>
-								
-								<h4>Gracze</h4>
-								<p>
-									<table border="1">
-										<tr>
-											<td>Imie</td>
-											<td>Wiek</td>
-											<td>Position</td>
-											<td>Nr</td>
-										</tr> 
-										<tr th:each="player : ${players}">
-											<td th:text="${player.getName()}"/>
-											<td th:text="${player.getAge()}"/>
-											<td th:text="${player.getPosition()}"/>
-											<td th:text="${player.getNumber()}"/>
-										</tr> 
-									</table>
-								</p>
-								<div class="cl">&nbsp;</div>
-							</div>
-							<!-- End Slide Item 2 -->
-							
-							<!-- Slide Item 3 -->
-							<div class="featured-side-item">
-								<div class="cl">&nbsp;</div>
-								<a href="#" class="left"><img src="images/featured-side-3.jpg" alt="" /></a>
-								<h4><a href="#">Dolor si atema commodo</a></h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque turpis urna</p>
-								<div class="cl">&nbsp;</div>
-							</div>
-							<!-- End Slide Item 3 -->
-
-						</div>
-						<div class="cl">&nbsp;</div>						
 					</div>
 				</div>
 				<!-- End Widget -->
@@ -144,77 +102,17 @@
 		<div class="shell">		
 			<div class="cl">&nbsp;</div>	
 			<div id="sidebar">
-				<h2>nowosci</h2>
+				<h2>NOWOŚCI</h2>
 				<ul>
-				    <li>
-				    	<small class="date">12.05.11</small>
-				    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				    </li>
-				    <li>
-				    	<small class="date">12.05.10</small>
-				    	<p>Donec venenatis varius urna vitae congue.</p>
-				    </li>
-				    <li>
-				    	<small class="date">12.05.09</small>
-				    	<p>Ullam vel neque ut lectus cursus dapibus.</p>
+				    <li th:each="newsObject, iterStat : ${news}" th:if="${iterStat.index >= iterStat.size-3}">
+				    	<small class="date"> <div th:text="${newsObject.getDate()}"/></small>
+				    	<p th:text="${newsObject.getMessage()}"/>
 				    </li>
 				</ul>
-				<a href="#" class="archives">News Archives</a>
+				<a href="news" class="archives">Archiwum Nowości</a>
 			</div>
 			<div id="content">
 				<div class="cl">&nbsp;</div>
-				<div class="grey-box">
-					<h3><a href="#">Lorem ipsum dolor sit amet.</a></h3>
-					<a href="#"><img src="images/main-1.jpg" alt="" /></a>
-					<p>
-						<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum, odio tincidunt egestas</span>
-						<a href="#" class="button">Read more</a>
-					 </p>
-				</div>
-				<div class="grey-box">
-					<h3><a href="#">Curabitur elementum, odio tincidunt </a></h3>
-					<a href="#"><img src="images/main-2.jpg" alt="" /></a>
-					<p>
-						<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum, odio tincidunt egestas</span>
-						<a href="#" class="button">Read more</a>
-					 </p>
-				</div>
-				<div class="grey-box last">
-					<h3><a href="#">Etiam iaculis tortor vel arcu porta consectetur.</a></h3>
-					<a href="#"><img src="images/main-3.jpg" alt="" /></a>
-					<p>
-						<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum, odio tincidunt egestas</span>
-						<a href="#" class="button">Read more</a>
-					 </p>
-				</div>
-				<div class="cl">&nbsp;</div>
-				<div class="video-box">
-					<div class="cl">&nbsp;</div>
-					<h2 class="left">video spot</h2>
-					<a href="#" class="button">All videos</a>
-					<div class="cl">&nbsp;</div>
-					<div class="video-item-box">
-						<a href="#" class="left"><img src="images/video-1.jpg" alt="" /></a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-						<a href="#" class="watch-now">Watch now</a>
-					</div>
-					<div class="video-item-box second">
-						<a href="#" class="left"><img src="images/video-2.jpg" alt="" /></a>
-						<p>Curabitur consectetur tellus a diam tincidunt pellentesque</p>
-						<a href="#" class="watch-now">Watch now</a>
-					</div>
-					<div class="video-item-box">
-						<a href="#" class="left"><img src="images/video-3.jpg" alt="" /></a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-						<a href="#" class="watch-now">Watch now</a>
-					</div>
-					<div class="video-item-box second">
-						<a href="#" class="left"><img src="images/video-4.jpg" alt="" /></a>
-						<p>Aliquam erat volutpat. Nam tortor justo, pretium eget iaculis et</p>
-						<a href="#" class="watch-now">Watch now</a>
-					</div>
-					<div class="cl">&nbsp;</div>
-				</div>
 			</div>
 			<div class="cl">&nbsp;</div>
 		</div>
