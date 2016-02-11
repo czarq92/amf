@@ -151,31 +151,25 @@
 			</div>
 			<div id="content">
 				<div class="video-box">
-					<div class="cl">&nbsp;</div>
-					<h2 class="center">Wyniki Ostatnich Meczy</h2>
-					<div class="cl">&nbsp;</div>
+					<h1 class="green center">Wyniki Ostatnich Meczy</h1><hr></hr><br></br><br></br>
+					
 					<div class="video-item-box">
-						<a href="#" class="left"><img src="images/video-1.jpg" alt="" /></a>
-						<p>Ktos 1 : 0 Inny</p>
-						<a href="#" class="watch-now">Szczegóły</a>
+						<a class="left"><img src="images/video-1.jpg"/></a>
+						<a class="blue" th:text="${teamsList[0].getName()}"></a>
+						<a class="error" th:text="${matchesList[0].getMatchStatistics().getResult_match()}"></a>
+						<a class="blue" th:text="${teamsList[1].getName()}"/>
+						<p th:text="${matchesList[0].getDate()}"/>
+						<a th:href="@{/matchDetails/}+${matchesList[0].getId_match()}" class="watch-now">Szczegóły</a>
 					</div>
-					<div class="video-item-box second">
-						<a href="#" class="left"><img src="images/video-2.jpg" alt="" /></a>
-						<p>Oni 2 : 1 Tamci</p>
-						<a href="#" class="watch-now">Szczegóły</a>
+				
+					<div class="video-item-box second" >
+						<a class="left"><img src="images/video-2.jpg" /></a>
+						<a class="blue" th:text="${teamsList[2].getName()}"></a>
+						<a class="error" th:text="${matchesList[1].getMatchStatistics().getResult_match()}"></a>
+						<a class="blue" th:text="${teamsList[3].getName()}"/>
+						<p th:text="${matchesList[1].getDate()}"/>
+						<a th:href="@{/matchDetails/}+${matchesList[1].getId_match()}" class="watch-now">Szczegóły</a>
 					</div>
-					<div class="cl">&nbsp;</div>
-					<div class="video-item-box">
-						<a href="#" class="left"><img src="images/video-3.jpg" alt="" /></a>
-						<p>Szaleni 3 : 3 Szybcy</p>
-						<a href="#" class="watch-now">Szczegóły</a>
-					</div>
-					<div class="video-item-box second">
-						<a href="#" class="left"><img src="images/video-1.jpg" alt="" /></a>
-						<p>Tamci 2 : 1 Szycby</p>
-						<a href="#" class="watch-now">Szczegóły</a>
-					</div>
-					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<div class="cl">&nbsp;</div>
