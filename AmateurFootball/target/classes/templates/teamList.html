@@ -22,7 +22,7 @@
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<ul>
-				<li><a href="index">Aktualności</a></li>
+				<li><a href="playerList">Gracze</a></li>
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
@@ -74,10 +74,9 @@
 					<div id="heading-box-cnt">
 						<div class="featured-side-item">
 							<div id="sidebar2">
-								<h4 class="center">Lista Zarejestrowanych Drużyn</h4>
-								<hr></hr>
+								<h2 class="center green">Lista Zarejestrowanych Drużyn</h2><hr></hr><br></br>
 								<div class="error center" th:if="${session.nameUserLogged != null}">Przy drużynie którą trenujesz pojawi się opcja "EDYTUJ DRUŻYNĘ"</div>
-								<br></br>
+								
 								<table border="1" class="center">
 									<tr>
 										<td><b>Nazwa Druzyny</b></td>

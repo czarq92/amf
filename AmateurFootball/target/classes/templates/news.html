@@ -22,7 +22,7 @@
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<ul>
-				<li><a href="index">Aktualności</a></li>
+				<li><a href="playerList">Gracze</a></li>
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
@@ -80,13 +80,13 @@
 								<div id="sidebar2">
 									<h1 class="green center">Archiwum Nowości</h1><hr></hr>
 									<ul class="center">
+										<input type="reset" id="previous" class="button2 button-switch" value="&lt;&lt;"/>
+										<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/>
+										
 									    <li th:each="newsObject : ${news}">
 									    	<small class="date"> <div th:text="${newsObject.getDate()}"/></small>
 									    	<p2 th:text="${newsObject.getMessage()}"/>
 									    </li>
-										
-										<input type="reset" id="previous" class="button2 button-switch" value="&lt;&lt;"/>
-										<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/><p></p>
 									</ul>
 								</div>
 							</div>

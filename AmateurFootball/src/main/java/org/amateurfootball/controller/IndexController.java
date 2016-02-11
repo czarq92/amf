@@ -4,7 +4,6 @@ package org.amateurfootball.controller;
 import java.util.List;
 
 import org.amateurfootball.model.Match;
-import org.amateurfootball.repository.TeamRepository;
 import org.amateurfootball.service.MiniTableService;
 import org.amateurfootball.service.TopNewsService;
 import org.amateurfootball.service.VideoService;
@@ -22,18 +21,14 @@ public class IndexController {
 	private TopNewsService topNewsService;
 	@Autowired
 	private VideoService videoService;
-	@Autowired
-	private TeamRepository teamRepository;
 	
 	@RequestMapping(value={"/", "/index"})
 	public String index(Model model){
+		List<Match> matchesList = videoService.getLastMatches();
 
 		model.addAttribute("teams", miniTableService.getTopTeamList());
 		model.addAttribute("players", miniTableService.getTopPlayerList());
 		model.addAttribute("news", topNewsService.getTopNewsList());
-		
-		List<Match> matchesList = videoService.getLastMatches();
-		
 		model.addAttribute("matchesList", matchesList);
 		model.addAttribute("teamsList", videoService.getPlayedTeams(matchesList));
 		

@@ -43,8 +43,6 @@ public class VideoService {
 			if(counter == numberOfelements) break;
 		}		
 
-		System.out.println(lastMatches.toString());
-		
 		return lastMatches;
 	}
 	

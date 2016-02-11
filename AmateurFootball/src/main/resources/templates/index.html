@@ -22,7 +22,7 @@
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<ul>
-				<li><a href="index">Aktualności</a></li>
+				<li><a href="playerList">Gracze</a></li>
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
@@ -78,9 +78,9 @@
 							
 							<div class="featured-main-details">
 								<div class="featured-main-details-cnt">									
-									<h4>Informacje o nadchodzacych meczach</h4>
+									<h4>Informacje o nadchodzących meczach</h4>
 									
-									<p>Juz niebawem, mecz ligi podworkowej !</p>
+									<p>Już niebawem, mecz ligi podwórkowej !</p>
 								</div>
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 				<div class="video-box">
 					<h1 class="green center">Wyniki Ostatnich Meczy</h1><hr></hr><br></br><br></br>
 					
-					<div class="video-item-box">
+					<div class="video-item-box center">
 						<a class="left"><img src="images/video-1.jpg"/></a>
 						<a class="blue" th:text="${teamsList[0].getName()}"></a>
 						<a class="error" th:text="${matchesList[0].getMatchStatistics().getResult_match()}"></a>
@@ -162,7 +162,7 @@
 						<a th:href="@{/matchDetails/}+${matchesList[0].getId_match()}" class="watch-now">Szczegóły</a>
 					</div>
 				
-					<div class="video-item-box second" >
+					<div class="video-item-box second center" >
 						<a class="left"><img src="images/video-2.jpg" /></a>
 						<a class="blue" th:text="${teamsList[2].getName()}"></a>
 						<a class="error" th:text="${matchesList[1].getMatchStatistics().getResult_match()}"></a>

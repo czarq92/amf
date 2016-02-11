@@ -22,7 +22,7 @@
 		<div class="shell">
 			<div class="cl">&nbsp;</div>
 			<ul>
-				<li><a href="index">Aktualności</a></li>
+				<li><a href="playerList">Gracze</a></li>
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="#">Tabele</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
@@ -63,9 +63,9 @@
 					    	<div th:if="${session.nameUserLogged != null}">
 					    		<a href="coachSite" class="link">Strona TRENERA</a>
 					    	</div></li>
-					    <li><div class="link"><a href="#">Informacje o stronie</a></div></li>
+					    <li><div class="link"><a href="infoSite">Informacje o stronie</a></div></li>
 					    <li><div class="link"><a href="#">POMOC</a></div></li>
-			    	    <li><div class="link"><a href="#">KONTAKT</a></div></li>
+			    	    <li><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->
@@ -76,9 +76,12 @@
 						<div class="featured-side">
 							<div class="featured-side-item">
 								<div id="sidebar2">
-									<h4 class="center">Lista Graczy</h4>
-									<hr></hr>
+									<h2 class="center green">Lista Graczy</h2><hr></hr><br></br>
 									<div class="error center" th:if="${session.nameUserLogged != null}">! UWAGA !<br></br> Usunięcie gracza spowoduje nieodwracalne wydalenie gracza z Twojej drużyny!!</div>
+					
+									<input type="reset" id="previous" class="button2 button-switch" value="&lt;&lt;"/>
+									<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/><p></p>
+									
 									<ul>
 									    <table border="1" class="center">
 									    <tr>
@@ -139,5 +142,14 @@
 		</div>
 	</div>
 	<!-- End Footer -->
+	
+	<script type="text/javascript">
+	    document.getElementById("previous").onclick = function () {
+	        location.href = "/previousPlayers";
+	    };
+	    document.getElementById("next").onclick = function () {
+	        location.href = "/nextPlayers";
+	    };
+	</script>
 </body>
 </html>
