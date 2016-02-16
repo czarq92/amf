@@ -26,7 +26,7 @@
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
 			    <li><a href="matchSchedule">Harmonogram</a></li>
-			    <li><a href="#">Statystyki</a></li>
+			    <li><a href="statistics">Statystyki</a></li>
 			    <li><a href="registration">REJESTRACJA</a></li>
 			    <li>
 				    <a href="login">
@@ -62,9 +62,9 @@
 					    	<div th:if="${session.nameUserLogged != null}">
 					    		<a href="coachSite" class="link">Strona TRENERA</a>
 					    	</div></li>
-					    <li><div class="link"><a href="#">Informacje o stronie</a></div></li>
-					    <li><div class="link"><a href="#">POMOC</a></div></li>
-			    	    <li><div class="link"><a href="#">KONTAKT</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="infoSite">Informacje o Stronie</a></div></li>
+					    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="#">POMOC</a></div></li>
+			    	    <li th:if="${session.nameUserLogged != 'admin'}"><div class="link"><a href="contact">KONTAKT</a></div></li>
 					</ul>
 				</div>
 				<!-- End Sub nav -->

@@ -1,20 +1,20 @@
 package org.amateurfootball.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.amateurfootball.model.Match;
+import org.amateurfootball.model.Stadium;
 import org.amateurfootball.model.Team;
 import org.amateurfootball.model.TeamChoosenDate;
 import org.amateurfootball.repository.MatchRepository;
 import org.amateurfootball.repository.TeamChoosenDateRepository;
 import org.amateurfootball.repository.TeamRepository;
 import org.amateurfootball.service.DateService;
-import org.amateurfootball.service.MatchService;
 import org.amateurfootball.service.RandomTeamService;
 import org.amateurfootball.service.TabConvertService;
-import org.amateurfootball.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +37,6 @@ public class NotifyTeamController {
 	private DateService dateService;
 	@Autowired
 	private RandomTeamService randomTeamService;
-	@Autowired
-	private TeamService teamService;
-	@Autowired
-	private MatchService matchService;
 	
 	private Team opponentTeam;
 	
@@ -83,52 +79,82 @@ public class NotifyTeamController {
 		if(dateInTab[2] == dateService.yearToday()){
 			if(dateInTab[1] == dateService.monthToday()){
 				if(dateInTab[0] > dateService.dayToday()){
-//					teamChoosenDateRepository.save(choosenDate);
+					teamChoosenDateRepository.save(choosenDate);
 					
-					if( !findOpponent(coachTeamId, choosenDate) ){
-						session.setAttribute("NoOpponent", true);
+					if( !setTheMatch(coachTeamId, choosenDate) ){
+						session.setAttribute("noOpponent", true);
+						session.setAttribute("findOpponent", false);
+						
 						return "redirect:/coachSite";
 					} else {
-						session.setAttribute("NoOpponent", false);
+						session.setAttribute("noOpponent", false);
+						session.setAttribute("findOpponent", true);
+						
 						return "redirect:/coachSite";
 					}
 				} else {
 					model.addAttribute("wrongDate", true);
+					
 					return "notifyTeam";
 				}
 			} else if(dateInTab[1] > dateService.monthToday()){
-//				teamChoosenDateRepository.save(choosenDate);
+				teamChoosenDateRepository.save(choosenDate);
 				
-				if( !findOpponent(coachTeamId, choosenDate) ){
-					session.setAttribute("NoOpponent", true);
+				if( !setTheMatch(coachTeamId, choosenDate) ){
+					session.setAttribute("noOpponent", true);
+					session.setAttribute("findOpponent", false);
+					
 					return "redirect:/coachSite";
 				} else {
-					session.setAttribute("NoOpponent", false);
+					session.setAttribute("noOpponent", false);
+					session.setAttribute("findOpponent", true);
+					
 					return "redirect:/coachSite";
 				}
 			}
 		} else if(dateInTab[2] > dateService.yearToday()){
-//			teamChoosenDateRepository.save(choosenDate);
+			teamChoosenDateRepository.save(choosenDate);
 			
-			if( !findOpponent(coachTeamId, choosenDate) ){
-				session.setAttribute("NoOpponent", true);
+			if( !setTheMatch(coachTeamId, choosenDate) ){
+				session.setAttribute("noOpponent", true);
+				session.setAttribute("findOpponent", false);
+				
 				return "redirect:/coachSite";
 			} else {
-				session.setAttribute("NoOpponent", false);
+				session.setAttribute("noOpponent", false);
+				session.setAttribute("findOpponent", true);
+				
 				return "redirect:/coachSite";
 			}
 		} 
 		return "redirect:/coachSite";
 	}
 	
-	public boolean findOpponent(long coachTeamId, TeamChoosenDate choosenDate){
+	public boolean setTheMatch(long coachTeamId, TeamChoosenDate choosenDate){
 		opponentTeam = searchOpponentWithTheSameDate(coachTeamId, choosenDate.getDate());
 		
 		if (opponentTeam == null){
 			return false;
 		}
+
+		Match match = new Match();
+		Random rand = new Random();
 		
-		System.out.println(opponentTeam);
+		Stadium opponentStadium = opponentTeam.getStadium();
+
+		String[] tab = {"8:00","10:00","12:00","14:00","16:00","18:00","20:00"};
+		int randomHourIndex = rand.nextInt(tab.length-1);
+		
+		match.setFirst_team_id((int) coachTeamId);
+		match.setSecond_team_id(Math.toIntExact(opponentTeam.getId_team())); 
+		match.setDate(choosenDate.getDate());
+		match.setStadium(opponentStadium);
+		match.setHour(tab[randomHourIndex]);
+		
+		matchRepository.save(match);
+		
+		deleteChoosenTeamsDate(teamRepository.findOne(coachTeamId), opponentTeam, choosenDate.getDate());
+		
 		return true;
 	}
 	
@@ -137,7 +163,7 @@ public class NotifyTeamController {
 		
 		teamDateList = teamChoosenDateRepository.findAll();
 		
-		int attempts = 3;
+		int attempts = 5;
 		int i = 0;
 		TeamChoosenDate opponentTeamChoosenDate = null;
 		
@@ -163,55 +189,22 @@ public class NotifyTeamController {
 			
 		} while(!finded);
 		
-		
 		return opponentTeam;
 	}
 	
+	public void deleteChoosenTeamsDate(Team firstTeam, Team secondTeam, String date){
+		findTeamAndDeleteChoosendate(firstTeam, date);
+		findTeamAndDeleteChoosendate(secondTeam, date);
+	}
 	
-//	public String verifyData(String choosenDate, int teamId){
-//		List<TeamChoosenDate> teamDateList = new ArrayList<>();
-//		teamDateList = teamChoosenDateRepository.findAll();
-//		
-//		int opponentId_stadium;
-//		
-//		String startHour = "8:00";
-//		
-//		//dla WSZYSTKICH zgłoszonych drużyn...
-//		for (TeamChoosenDate obj : teamDateList) {
-//			//wylosuj ID drużyny z listy zgłoszonych drużyn
-//			int randomTeamId = randomTeamService.randomTeam(teamDateList);
-//			
-//			//sprawdź czy Moja zgłoszona data == Data zgłoszenia innej drużyny
-//			//... i czy nie wylosowałem sam siebie
-//			if(choosenDate == obj.getDate() && teamId != randomTeamId){
-//				Match newMatch = new Match();
-//				
-//				newMatch.setFirst_team_id(teamId);
-//				newMatch.setSecond_team_id(randomTeamId);
-//				opponentId_stadium = teamService.findStadiumIdByTeamId(randomTeamId);
-//				newMatch.setDate(choosenDate);
-//				
-//				if(matchService.verifyHour(startHour, choosenDate ) == startHour){
-//					newMatch.setHour(startHour);
-//				} else {
-//					startHour = matchService.verifyHour(startHour, choosenDate);
-//					newMatch.setHour(startHour);
-//				}
-//				
-//				if(matchService.checkFreeStadium(opponentId_stadium, choosenDate, startHour) == true) {
-//					newMatch.setId_stadium(opponentId_stadium);
-//				} else {
-//					newMatch.setId_stadium(teamService.findStadiumIdByTeamId(teamId));
-//				}
-//				
-//				System.out.println(newMatch);
-//				//matchRepository.save(newMatch);
-//				return "redirect:/coachSite";
-//			} else {
-//				//??
-//			}
-//		}
-//		return "redirect:/coachSite";
-//	}
-	
+	public void findTeamAndDeleteChoosendate(Team team, String date){
+		List<TeamChoosenDate> teamChoosenDateList = teamChoosenDateRepository.findAll();
+		
+		for (TeamChoosenDate teamDate : teamChoosenDateList) {
+			if(teamDate.getTeam() == team && teamDate.getDate().equals(date)){
+				teamChoosenDateRepository.delete(teamDate);
+				break;
+			}
+		}
+	}
 }

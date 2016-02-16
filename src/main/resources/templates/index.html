@@ -26,7 +26,7 @@
 				<li><a href="teamList">Drużyny</a></li>
 			    <li><a href="matchResults">Wyniki</a></li>
 			    <li><a href="matchSchedule">Harmonogram</a></li>
-			    <li><a href="#">Statystyki</a></li>
+			    <li><a href="statistics">Statystyki</a></li>
 			    <li><a href="registration">REJESTRACJA</a></li>
 			    <li>
 				    <a href="login">
@@ -73,7 +73,7 @@
 					<div id="heading-box-cnt">
 						<div class="featured-main">
 						
-							<img src="images/featured-main.jpg"/>
+							<img src="images/featured-main.png"/>
 							
 							<div class="featured-main-details">
 								<div class="featured-main-details-cnt">									
@@ -153,7 +153,7 @@
 					<h1 class="green center">Wyniki Ostatnich Meczy</h1><hr></hr><br></br><br></br>
 					
 					<div class="video-item-box center">
-						<a class="left"><img src="images/video-1.jpg"/></a>
+						<a class="left"><img src="images/video-1.png"/></a>
 						<a class="blue" th:text="${teamsList[0].getName()}"></a>
 						<a class="error" th:text="${matchesList[0].getMatchStatistics().getResult_match()}"></a>
 						<a class="blue" th:text="${teamsList[1].getName()}"/>
@@ -162,7 +162,7 @@
 					</div>
 				
 					<div class="video-item-box second center" >
-						<a class="left"><img src="images/video-2.jpg" /></a>
+						<a class="left"><img src="images/video-2.png" /></a>
 						<a class="blue" th:text="${teamsList[2].getName()}"></a>
 						<a class="error" th:text="${matchesList[1].getMatchStatistics().getResult_match()}"></a>
 						<a class="blue" th:text="${teamsList[3].getName()}"/>
