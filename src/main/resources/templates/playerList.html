@@ -84,20 +84,20 @@
 									<ul>
 									    <table border="1" class="center">
 									    <tr>
-									    	<td>Imie i Nazwisko</td>
-									    	<td>Numer Gracza</td>
-									    	<td>Pozycja</td>
-									    	<td>Wiek Gracza</td>
-									    	<td>Nazwa Drużyny</td>
+									    	<td><b>Imie i Nazwisko</b></td>
+									    	<td><b>Numer Gracza</b></td>
+									    	<td><b>Pozycja</b></td>
+									    	<td><b>Wiek Gracza</b></td>
+									    	<td><b>Nazwa Drużyny</b></td>
 									    	<td></td>
 									    </tr>
 									    <tr th:each="player : ${playerList}">
-										    <td><a th:text="${player.getName()} + ' ' + ${player.getSurname()}"/></td>
+										    <td class="green" th:text="${player.getName()} + ' ' + ${player.getSurname()}"/>
 									    	<td><p2 th:text="${player.getNumber()}"/></td>
-									    	<td><p2 th:text="${player.getPosition()}"/></td>
+									    	<td class="yellow" th:text="${player.getPosition()}"/>
 									    	<td><p2 th:text="${player.getAge()} + ' lat'"/></td>
 									    	<div th:if="${player.getTeam() != null}">
-									    		<td><p2 th:text="${player.getTeam().getName()}"/></td>
+									    		<td class="blue" th:text="${player.getTeam().getName()}"/>
 									    		<td><div th:if="${session.idTeamUserLogged == player.getTeam().getId_team()}"><a class="error" th:href="@{/delPlayer/}+${player.getId_player()}">USUŃ GRACZA Z DRUŻYNY</a></div></td>
 									    	</div>
 									    	<div th:if="${player.getTeam() == null}">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Lista Druzyn</title>
+	<title>TeamStat</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 	<!--[if lte IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
 </head>
@@ -73,24 +73,23 @@
 					<div id="heading-box-cnt">
 						<div class="featured-side-item">
 							<div id="sidebar2">
-								<h2 class="center green">Lista Zarejestrowanych Drużyn</h2><hr></hr><br></br>
-								<div class="error center" th:if="${session.nameUserLogged != null}">Przy drużynie którą trenujesz pojawi się opcja "EDYTUJ DRUŻYNĘ"</div>
+								<h2 class="center green">Statystyki Druzyn</h2><hr></hr><br></br>
 								
 								<table border="1" class="center">
 									<tr>
-										<td><b>Nazwa Druzyny</b></td>
-										<td><b>Trener</b></td>
-										<td><b>Miasto</b></td>
-										<td><b>Nazwa Stadionu</b></td>
-										<td></td>
-									</tr>
-								    <tr th:each="team : ${teamList}">
-								    	<td class="green" th:text="${team.getName()}"/>
-								    	<td class="blue" th:text="${team.getCoach().getName() + ' ' + team.getCoach().getSurname()}"/>
-								    	<td><p2 th:text="${team.getCity()}"/></td>
-								    	<td><p2 th:text="${team.getStadium().getName()}"/></td>
-								    	<td><div th:if="${session.idTeamUserLogged == team.getId_team()}"><a th:href="@{/editTeam/}+${team.getId_team()}">EDYTUJ DRUŻYNĘ</a></div></td>
-								    </tr>
+										<td><b>Miejsce w Rankingu</b></td>
+										<td><b>Nazwa Drużyny</b></td>
+										<td><b>Bramki Trafione</b></td>
+										<td><b>Bramki Stracone</b></td>
+										<td><b>Zdobyte Punkty</b></td>
+									</tr> 
+									<tr th:each="team : ${teams}">
+										<td th:text="${team.getRanked()}"/>
+										<td class="green" th:text="${team.getName()}"/>
+										<td class="yellow" th:text="${team.getGoals_hit()}" />
+										<td class="orange" th:text="${team.getGoals_lost()}" />
+										<td class="blue" th:text="${team.getPoints()}"/>
+									</tr> 
 								</table>
 							</div>
 						</div>

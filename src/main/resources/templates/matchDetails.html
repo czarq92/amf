@@ -77,31 +77,31 @@
 							<div class="featured-side-item">
 								<div id="sidebar2" class="center">
 									<h1>Sczegóły Meczu</h1>
-									<hr></hr><br></br>
+									<hr></hr>
 								    <table border="0" class="center">
 								    	<tr>
 											<td class="yellow" colspan="3" th:text="${match.getDate() + 'r. godzina ' + match.getHour()}" />
 								    	</tr>
 								    	<tr>
-								    		<td class ="blue" colspan="3" th:text="${match.getStadium().getName() + '(' + match.getStadium().getCity() + ')' }"/>
+								    		<td class ="blue" colspan="3" th:text="${match.getStadium().getName() + ' (' + match.getStadium().getCity() + ')' }"/>
 								    	</tr>
 								    	
 								    	<tr th:object="${match}">
 								    		<div th:each="team : ${teams}"> 
-												<div class="green" th:if="${team.getId_team() == match.getFirst_team_id()}">
-													<td class="green" th:text="${team.getName()}"/>
+												<div th:if="${team.getId_team() == match.getFirst_team_id()}">
+													<td class="greenH" th:text="${team.getName()}"/>
 													<td></td>
 												</div>
-												<div class="green" th:if="${team.getId_team() == match.getSecond_team_id()}"> 
-													<td class="green" th:text="${team.getName()}"/>
+												<div th:if="${team.getId_team() == match.getSecond_team_id()}"> 
+													<td class="greenH" th:text="${team.getName()}"/>
 												</div>
 											</div>
 								    	</tr>
 								    	
 								    	<tr>
-								    		<td align="right"> <a class="error" th:text="${matchDetails.getFirst_team_goals()}" /></td>
+								    		<td align="right" class="bigRed" th:text="${matchDetails.getFirst_team_goals()}" />
 								    		<td>:</td>
-								    		<td align="left"><a class="error" th:text="${matchDetails.getSecond_team_goals()}" /></td>
+								    		<td align="left" class="bigRed" th:text="${matchDetails.getSecond_team_goals()}"/>
 								    	</tr>	
 								    	
 								    	<tr>

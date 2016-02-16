@@ -90,18 +90,18 @@
 										<tr th:each="match : ${matches}">
 											<div th:each="team : ${teams}"> 
 												<div th:if="${team.getId_team() == match.getFirst_team_id()}">
-													<td th:text="${team.getName()}"/>
+													<td class="green" th:text="${team.getName()}"/>
 												</div>
 												<div th:if="${team.getId_team() == match.getSecond_team_id()}"> 
-													<td th:text="${team.getName()}"/>
+													<td class="green" th:text="${team.getName()}"/>
 												</div>
 											</div>
 											
-											<td th:text="${match.getDate()}" />
-											<td th:text="${match.getHour()}"/>
+											<td class="blue" th:text="${match.getDate()}" />
+											<td class="blue" th:text="${match.getHour()}"/>
 											
 											<div th:each="matchStat : ${matchStats}" th:if="${match.getId_match() == matchStat.match.getId_match()}">
-												<td th:text="${matchStat.getResult_match()}"/>
+												<td class="yellow" th:text="${matchStat.getResult_match()}"/>
 											</div>
 											
 											<div th:if="${match.getMatchStatistics() == null}">

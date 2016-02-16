@@ -74,34 +74,34 @@
 										
 								    <table border="1" class="center">
 										<tr>
-											<td>Drużyna A</td>
-											<td>Drużyna B</td>
-											<td>Data</td>
-											<td>Godzina</td>
-											<td>Wynik</td>
-											<td>Stadion</td>
-											<td>Zdarzenie</td>
+											<td><b>Drużyna Pierwsza</b></td>
+											<td><b>Drużyna Druga</b></td>
+											<td><b>Data</b></td>
+											<td><b>Godzina</b></td>
+											<td><b>Wynik</b></td>
+											<td><b>Stadion</b></td>
+											<td><b>Zdarzenie</b></td>
 											<td></td>
 										</tr> 
 										<tr th:each="match : ${matches}">
 											<div th:each="team : ${teams}"> 
 												<div th:if="${team.getId_team() == match.getFirst_team_id()}">
-													<td th:text="${team.getName()}"/>
+													<td class="green" th:text="${team.getName()}"/>
 												</div>
 												<div th:if="${team.getId_team() == match.getSecond_team_id()}"> 
-													<td th:text="${team.getName()}"/>
+													<td class="green" th:text="${team.getName()}"/>
 												</div>
 											</div>
 											
-											<td th:text="${match.getDate()}" />
-											<td th:text="${match.getHour()}"/>
+											<td class="blue" th:text="${match.getDate()}" />
+											<td class="blue" th:text="${match.getHour()}"/>
 											
 											<div th:each="matchStat : ${matchStats}" th:if="${match.getId_match() == matchStat.match.getId_match()}">
-												<td th:text="${matchStat.getResult_match()}"/>
+												<td class="yellow" th:text="${matchStat.getResult_match()}"/>
 											</div>
 											
 											<div th:if="${match.getMatchStatistics() == null}">
-												<td>- : -</td>
+												<td class="error">- : -</td>
 											</div>
 											
 											<div th:each="stadium : ${stadiums}" th:if="${stadium.getId_stadium() == match.stadium.getId_stadium()}" >

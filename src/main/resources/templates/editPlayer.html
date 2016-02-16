@@ -22,7 +22,7 @@
 			<input type="hidden" th:field="*{team.id_team}"/>
 		
 			<input type="reset" id="previous" class="button2 button-switch" value="&lt;&lt;"/>
-			<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/><p></p>
+			<input type="reset" id="next" class="button2 button-switch" value="&gt;&gt;"/>
 	
 			<div class="info">Numer gracza: </div>
 			<input type="text" readonly="readonly" th:field="*{number}" th:class="${#fields.hasErrors('number')}? 'error'"/><br/>

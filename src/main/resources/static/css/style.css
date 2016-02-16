@@ -26,9 +26,21 @@ a:hover { text-decoration: underline; cursor: pointer;}
 	font-weight: 800;
  }
  
+ .bigRed { 
+	color: #FD0000;
+	font-weight: 800;
+	font-size: 26px;
+ }
+ 
 .green {
 	color: #9fea00;
 	font-weight: 800;
+} 
+
+.greenH {
+	color: #9fea00;
+	font-weight: 800;
+	font-size: 26px;
 } 
 
 .blue {
