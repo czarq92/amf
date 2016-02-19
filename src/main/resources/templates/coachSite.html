@@ -81,8 +81,11 @@
 								<h2 class="center blue">INFORMACJE ZWROTNE</h2><br></br>
 								
 								<table border="1">
-									<tr th:if="${session.NoOpponent == true}">
+									<tr th:if="${session.noOpponent == true}">
 										<td class="error center">Nie znaleziono przeciwnika na wybraną datę !</td>
+									</tr>
+									<tr th:if="${session.findOpponent == true}">
+										<td class="green center">Znaleziono przeciwnika na wybraną datę. Sprawdź dodany mecz klikając przycisk Harmonogram</td>
 									</tr>
 								</table>
 							</div>

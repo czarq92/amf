@@ -3,6 +3,7 @@ package org.amateurfootball.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TEAM_CHOOSEN_DATE")
@@ -12,6 +13,7 @@ public class TeamChoosenDate implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id_choosen_date;
+	@NotNull
 	private String date;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

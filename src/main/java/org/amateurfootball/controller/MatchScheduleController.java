@@ -40,13 +40,12 @@ public class MatchScheduleController {
 		todayDateTab[0] = dateService.dayToday();
 		todayDateTab[1] = dateService.monthToday();
 		todayDateTab[2] = dateService.yearToday();
+		matchList = new ArrayList<>();
 		
 		for (Match match : matchRepository.findAll()) {
 			String date = match.getDate();
 			
 			matchDateTab = tabConvertService.convertStringToIntTab(date);
-			
-			matchList = new ArrayList<>();
 			
 			if(matchDateTab[2] == todayDateTab[2]){
 				if(matchDateTab[1] == todayDateTab[1]){
